@@ -119,7 +119,7 @@ construct_fixture(
 ```perl
 
 use Test::WWW::Mechanize::Catalyst;
-my $mech = Test::WWW::Mechanize::Catalyst->new( catalyst_app => 'アプリ(Tachyon::Website)' );
+my $mech = Test::WWW::Mechanize::Catalyst->new( catalyst_app => 'アプリ(MyApp)' );
 
 # do not redirect
 $mech->requests_redirectable( [] );
