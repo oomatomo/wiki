@@ -73,7 +73,8 @@ docker search centos
 ```
 
 
-## Dockerのバージョンを確認
+## Dockerのバージョンを確認  
+```
 ?  ~  docker version
 Client version: 0.7.2
 Go version (client): go1.2
@@ -82,8 +83,10 @@ Server version: 0.7.2
 Git commit (server): 28b162e
 Go version (server): go1.2
 Last stable version: 0.7.2
+```
 
-## Docker イメージを検索する
+## Docker イメージを検索する  
+```
 ?  ~  docker search tutorial
 NAME                           DESCRIPTION                                     STARS     OFFICIAL   TRUSTED
 learn/tutorial                                                                 0
@@ -95,17 +98,23 @@ mhubig/echo                    Simple echo loop from the tutorial.             0
 ivarvong/redis                 From the redis tutorial. Just redis-server...   0
 danlucraft/postgresql          Postgresql 9.3, on port 5432, un:docker, p...   0
 amattn/postgresql-9.3.0        precise base, PostgreSQL 9.3.0 installed w...   0
+```
 
-## Dockerのイメージをダウンロードする
+## Dockerのイメージをダウンロードする  
+```
 ?  ~  docker pull learn/tutorial
 Pulling repository learn/tutorial
 8dbd9e392a96: Download complete
+```  
 
 ## Docker上でechoコマンドを実行する
 
+```
 ?  ~  docker run learn/tutorial echo "hello world"
 hello world
+```
 
+```
 ?  ~  docker run learn/tutorial apt-get install -y ping
 Reading package lists...
 Building dependency tree...
@@ -121,19 +130,26 @@ Selecting previously unselected package iputils-ping.
 (Reading database ... 7545 files and directories currently installed.)
 Unpacking iputils-ping (from .../iputils-ping_3%3a20101006-1ubuntu1_amd64.deb) ...
 Setting up iputils-ping (3:20101006-1ubuntu1) ...
+```
 
-## イメージをコミット
+## イメージをコミット  
+
+```
 ?  ~  docker ps -l
 CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS              PORTS               NAMES
 0710132af978        learn/tutorial:latest   apt-get install -y p   5 minutes ago       Exit 0                                  naughty_poincare
 ?  ~  docker commit 0710 learn/ping
 535f88073c7d71ce1045293ebe62fccf01071e8afa56e5a6019938f25100d677
+```
 
-## Docerkの詳細の情報を見る
+## Docerkの詳細の情報を見る  
+```
 ? ~ docker ps -l
 CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
 3f32f9b50c7c        learn/ping:latest   ping google.com     About a minute ago   Exit 1                                  agitated_wozniak
+```
 
+```
 ?  ~  docker inspect 3f3
 [{
     "ID": "3f32f9b50c7ca75ca3efdb78d9bd8291a5b5ce1c666cd6e02b889f1d083ca09b",
@@ -205,31 +221,39 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
         "PublishAllPorts": false
     }
 }]%
+```
 
 ## 日本語化
 
 [日本語化について](http://www.ubuntulinux.jp/japanese)
+
+```
 wget -q https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg -O- | sudo apt-key add -
 wget -q https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg -O- | sudo apt-key add -
 sudo wget https://www.ubuntulinux.jp/sources.list.d/precise.list -O /etc/apt/sources.list.d/ubuntu-ja.list
 sudo apt-get update
 sudo apt-get upgrade
 
-vimの文字化け
+#vimの文字化け
 sudo aptitude install language-pack-ja
 export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
+```
 
 ## rbenvのインストールで躓いた点
  /opt/vagrant_ruby/bin/がすでに$PATHに設定されているため、
  削除する必要がある。(rbenv global 2.0.0-p247が反映されないため)
 
-# Docker起動する
-
+# Docker起動する  
+```
 sudo docker build -t oomatomo/base .
+```
 
-## zshで起動する
+## zshで起動する  
+```
 docker run -d -t -i oomatomo/base　/bin/zsh
+```
+
 
 
