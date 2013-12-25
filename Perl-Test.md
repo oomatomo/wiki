@@ -56,13 +56,6 @@ diag( 'ログの内容' );
 
 ```perl
 
-# AppDriverの場合
-use Test::Luxon::mysqld;
-
-my $mysqld = Test::Luxon::mysqld->setup;
-Test::Luxon::mysqld->cleanup( $mysqld );
-
-
 # 通常の場合
 my $mysqld = Test::mysqld->new(
       my_cnf => {
@@ -85,7 +78,7 @@ $dbh->do( "DLL" );
 
 ```
 
-### Test::mysqld
+### Test::Fixture::DBI
 
 DBの情報をymlへ変換
 
