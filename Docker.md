@@ -245,15 +245,21 @@ export LC_CTYPE=ja_JP.UTF-8
  /opt/vagrant_ruby/bin/がすでに$PATHに設定されているため、
  削除する必要がある。(rbenv global 2.0.0-p247が反映されないため)
 
-# Docker起動する  
+# Dockerビルドする
+
 ```
 sudo docker build -t oomatomo/base .
 ```
 
-## zshで起動する  
+## zshで起動する 
+
 ```
 docker run -d -t -i oomatomo/base　/bin/zsh
 ```
 
+## Dockerにアクセスする
 
+```
+sudo docker attach HASH
+```
 
