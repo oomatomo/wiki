@@ -67,12 +67,6 @@ Commands:
 
 ```
 
-```
-docker search centos
-
-```
-
-
 ## Dockerのバージョンを確認  
 ```
 ?  ~  docker version
@@ -149,6 +143,13 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 3f32f9b50c7c        learn/ping:latest   ping google.com     About a minute ago   Exit 1                                  agitated_wozniak
 ```
 
+CONTAINER IDのみほしい場合以下のようにする。
+
+```
+? ~ docker ps -l -q
+3f32f9b50c7c
+```
+
 ```
 ?  ~  docker inspect 3f3
 [{
@@ -223,35 +224,15 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 }]%
 ```
 
-## 日本語化
+## DockerFileの作成
 
-[日本語化について](http://www.ubuntulinux.jp/japanese)
-
-```
-wget -q https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg -O- | sudo apt-key add -
-wget -q https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg -O- | sudo apt-key add -
-sudo wget https://www.ubuntulinux.jp/sources.list.d/precise.list -O /etc/apt/sources.list.d/ubuntu-ja.list
-sudo apt-get update
-sudo apt-get upgrade
-
-#vimの文字化け
-sudo aptitude install language-pack-ja
-export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8
-export LC_CTYPE=ja_JP.UTF-8
-```
-
-## rbenvのインストールで躓いた点
- /opt/vagrant_ruby/bin/がすでに$PATHに設定されているため、
- 削除する必要がある。(rbenv global 2.0.0-p247が反映されないため)
-
-# Dockerビルドする
+## ビルドする
 
 ```
 sudo docker build -t oomatomo/base .
 ```
 
-## zshで起動する 
+## 起動する 
 
 ```
 docker run -d -t -i oomatomo/base　/bin/zsh
@@ -260,6 +241,6 @@ docker run -d -t -i oomatomo/base　/bin/zsh
 ## Dockerにアクセスする
 
 ```
-sudo docker attach HASH
+sudo docker attach 'CONTAINER ID'
 ```
 
