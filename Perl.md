@@ -1,5 +1,3 @@
-Perl
-
 # perlbrew install
 
 ```install
@@ -45,4 +43,12 @@ requires 'perl', '5.16.3';
 ````
 
 
+## 豆知識
+### Array to Hash
+
+```  
+$hash{$_}++ for (@array);
+ or
+%hash = map { $_ => 1 } @array;
+```
 
