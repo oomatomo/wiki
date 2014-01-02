@@ -12,61 +12,148 @@ http://downloads.vagrantup.com/
 
 ## 仮想環境の追加
 
-vagrant box add [ name ] [ URL ]
-作成できる仮想環境の種類を追加する
-isoファイルみたいなもの。
-
-vagrant box list
-作成できるリストの一覧
+```
+#作成できる仮想環境の種類を追加する
+#isoファイルみたいなもの。
+$ vagrant box add [ name ] [ URL ]
+#作成できるリストの一覧
+$ vagrant box list
+```
 
 色々なBox
 http://www.vagrantbox.es/
 
 ## 仮想環境の基本操作
 
-vagrant init [ name ]
-作成
+```
+#作成
+$ vagrant init [ name ]
+#起動
+$ vagrant up
+#停止
+$ vagrant halt
+#再起動
+$ vagrant reload
+#破棄
+$ vagrant destroy
+#sshでログイン
+$ vagrant ssh
+#vagrant sshをせずに接続できる
+$ vagrant ssh-config --host centos >> ~/.ssh/config
+$ ssh centos
+```
 
-vagrant up
-起動
+## Vagrantfile
 
-vagrant halt
-停止
+仮想環境の設定ファイルである。
 
-vagrant reload
-再起動
+```
+# 以下が設定ファイルとなる
+Vagrant.configure("2") do |config|
+	# VMのホスト名
+	config.vm.hostname = "my-server"
 
-vagrant destroy
-破棄
+	# vagrantのboxの名前
+	config.vm.box = "CentOS-6.4-x86_64-v20130731"
+	# このBoxのURL
+	# ローカルにconfig.vm.boxで設定したBox名が存在しない場合、以下のURLからBoxを取得する
+	config.vm.box_url = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box"
 
-vagrant ssh
-sshでログイン
+	# 
+	# 同期させるフォルダの選択 以下では 
+	# “../data”がホスト側 "/vagrant_data" VN側となる
+	config.vm.synced_folder "../data", "/vagrant_data"
+	# providerの設定（今回はVirtualbox）
+	config.vm.provider :virtualbox do |vb|
+		# GUIの画面を表示
+		vb.gui = true	
+		# virtualbox側にでるサーバの名前
+		vb.name = "my-server"
+		# メモリ変更
+		vb.customize ["modifyvm", :id, "--memory", "2048"]
+	end
 
-vagrant ssh-config --host centos >> ~/.ssh/config
-ssh centos
-vagrant sshをせずに接続できる
+end
+```
 
-## プラグイン
+## プラグイン  
 
+```
+$ vagrant plugin install plugin_name
+```
+  
 ### sahara
-サーバをいじっていて元に戻したいときに使う
+サーバをいじっていて元に戻したいときに使う  
 
-vagrant sandbox on
-sandbox モードに入る
+```
+$ vagrant plugin install sahara
+#sandbox モードに入る
+$ vagrant sandbox on
+#sandboxモードをOffにする
+$ vagrant sandbox off
+#sandboxモードのステータス
+$ vagrant sandbox status
+#onした状態まで巻き戻す
+$ vagrant sandbox rollback
+#変更内容を確定させる
+$ vagrant sandbox commit
+```
 
-vagrant sandbox rollback
-onした状態まで巻き戻す
+### vagrant-omnibus  
+ChefがBoxにインストールされているか確認するプラグイン
 
-vagrant sandbox commit
-変更内容を確定させる
+```
+$ vagrant plugin install vagrant-omnibus
+```
 
-### Berkshelf
-ChefのCookBookとVagrantfileを同時に作ってくれる。
-さらにGemfileみたいに他のCookbookを簡単にダウンロードできる
+### Berkshelf  
+ChefのCookBookとVagrantfileを同時に作ってくれる。　　
+さらにGemfileみたいに他のCookbookを簡単にダウンロードできる。  　　
+詳しくはChef.mdのほうで説明する。  
 
-berks cookbook
-cookbookの作成
+```
+$ vagrant plugin install vagrant-berkshelf
+```
 
-berks install
+```Vagrantfile
+Vagrant.configure("2") do |config|
+	# berkshelfの使用を許可する
+	config.berkshelf.enabled = true
 
-##
+	# Berksfileの場所を指定出来る
+	config.berkshelf.berksfile_path = "./Berksfile"
+	# Berksfileのここに記入　別ファイルとして作成しても可能
+	# こちらを利用する場合config.berkshelf.berksfile_pathはいらない
+  	File.open('Berksfile', 'w').write <<-EOS
+    	cookbook ‘yum’
+  	EOS
+
+	# ここで実行するレシピの選択を行う
+  	config.vm.provision :chef_solo do |chef|
+    	chef.add_recipe “yum”
+  	end
+end
+
+```
+
+### vagrant-serverspec
+
+serverspec用のプラグインである。
+
+```
+$ vagrant plugin install vagrant-serverspec
+```
+
+以下の設定を行うと`vagrant up`のときに
+`spec/default/*_spec.rb`に該当するファイルのテストを行う
+
+```
+Vagrant.configure("2") do |config|
+	・・・・・
+	config.vm.provision :serverspec do |spec|
+		spec.pattern = "spec/default/*_spec.rb"
+  	end
+end
+```
+
+
