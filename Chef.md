@@ -95,7 +95,7 @@ $ knife solo prepare centos #←接続するサーバ
 するとnodesフォルダにcentos.jsonが作成される。
 そこに実行したいRecipeを記入する。
 
-```
+```Ruby
 {
 	"run_list":[
       “recipe[myrecipe]”
@@ -117,13 +117,13 @@ notifiesというResorce内で利用出来る属性が存在する。
 これを利用して、あるリソースが完了したら、別のリソースを実行することができる
 トリガーみたいかな？？。
 
-```
+```Ruby
 resource "name" do
   notifies :notification, "resource_type[resource_name]", :timer
 end
 ```
 
-```Example
+```Ruby
 
 # こちらのリソースのアクションを実行しない設定にする
 # action :enableが該当する部分である
@@ -143,7 +143,7 @@ end
 yumやapt-getでインストールする物はすべてpackageを利用すればよい。
 さらに複数パッケージをインストールするときは以下のようにfor文で記入すればよい。  
 
-```
+```Ruby
 %w{wget gcc make}.each do |pkg|
    package pkg do
      action [:install, :upgrade]
@@ -321,7 +321,7 @@ $ kitchen init
 $ kitchen test
 ```
 
-```.kitchen.yml
+```Ruby:.kitchen.yml
 ---
 driver:
   name: vagrant
@@ -380,7 +380,7 @@ Auto-configure Vagrant from Vagrantfile? y/n: # Vagrantfileから設定を利用
 
 Rakefileに`rake spec`で実行するテストコードの設定を行う。
 
-```spec_helper.rb
+```Ruby:spec_helper.rb
 require 'rake'
 require 'rspec/core/rake_task'
 
@@ -394,7 +394,7 @@ end
 テストの書き方
 http://serverspec.org/resource_types.html
 
-```spec/*/*_spec.rb
+```Ruby:spec/*/*_spec.rb
 # これ必須
 require 'spec_helper'
 # 以下テスト用のリソースを記入
@@ -433,7 +433,7 @@ rspec ./spec/default/zsh_spec.rb:7 # Command "echo $SHELL" should return stdout 
 
 RubyでいうGemFileみたいなものでCookbook管理ツールです。
 
-```
+```Ruby
 site :opscode
 
 cookbook 'mysql'
