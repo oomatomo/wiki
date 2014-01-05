@@ -2,20 +2,20 @@
 
 ## 公式
 
-docs 
-http://docs.opscode.com/
+docs   
+http://docs.opscode.com/  
 
-community 
-http://community.opscode.com/
+community   
+http://community.opscode.com/  
 
 ### Chef Solo 
-１台でもChefを利用出来るようにしている。
-そのためにVagrantを利用することが多い。
-Chefを使用する流れとしてはVagrantで立ち上げたVMにChefの`kinfe solo`コマンドでCookBookを転送、VM上でCookBookを実行する。
+１台でもChefを利用出来るようにしている。  
+そのためにVagrantを利用することが多い。  
+Chefを使用する流れとしてはVagrantで立ち上げたVMにChefの`kinfe solo`コマンドでCookBookを転送、VM上でCookBookを実行する。  
 
 ## Install
 
-```
+```Bash
 $ gem i chef knife-solo test-kitchen serverspec berkshelf foodcritic --no-ri --no-rdoc
 ```   
 
@@ -24,29 +24,29 @@ $ gem i chef knife-solo test-kitchen serverspec berkshelf foodcritic --no-ri --n
 wikiみたいな物
 http://matschaffer.github.io/knife-solo/
 
-```
+```Bash
 # kitchenを作成する
-knife solo init DIRECTORY
+$ knife solo init DIRECTORY
 # HOSTにChefをインストールするかつnodesフォルダに新たに
 # HOSTNAME.jsonが追加される
-knife solo prepare [USER@]HOSTNAME [JSON] (options)
+$ knife solo prepare [USER@]HOSTNAME [JSON] (options)
 # kitchenをHOSTにアップロードし、chef-soloを実行する
-knife solo cook [USER@]HOSTNAME [JSON] (options)
+$ knife solo cook [USER@]HOSTNAME [JSON] (options)
 # prepareとcookを一度に行う 
-knife solo bootstrap [USER@]HOSTNAME [JSON] (options)
+$ knife solo bootstrap [USER@]HOSTNAME [JSON] (options)
 # アップロードされたkitchenを削除する
-knife solo clean [USER@]HOSTNAME
+$ knife solo clean [USER@]HOSTNAME
 # DIRECTORYに新たにCOOKBOOKNAMEが追加される
-knife cookbook create COOKBOOKNAME -o DIRECTORY
+$ knife cookbook create COOKBOOKNAME -o DIRECTORY
 # 構文チェック
-knife cookbook test COOKBOOKNAME
+$ knife cookbook test COOKBOOKNAME
 ```
 
 ## init  
 
 chefのKitchenとCookbookの作成を行います  
 
-```
+```Bash
 # Kitchen
 $ knife solo init chef-repo
 $ tree .
@@ -87,13 +87,14 @@ $ tree .
 ```
 
 ## Node  
-```
-$ ssh centos #←接続するサーバ
-$ knife solo prepare centos #←接続するサーバ
+
+```Bash
+$ ssh centos #←接続するサーバ  
+$ knife solo prepare centos #←接続するサーバ  
 ```  
 
-するとnodesフォルダにcentos.jsonが作成される。
-そこに実行したいRecipeを記入する。
+するとnodesフォルダにcentos.jsonが作成される。  
+そこに実行したいRecipeを記入する。  
 
 ```Ruby
 {
@@ -103,19 +104,45 @@ $ knife solo prepare centos #←接続するサーバ
 }
 ```
 
-##
-
 ## CookBook
 
-### Recipes
-実際の動作を行う
-#### Notifie
 
-http://www.engineyard.co.jp/blog/2013/chef-recipe-lifecycle/
-http://docs.opscode.com/chef/resources.html#notifications
-notifiesというResorce内で利用出来る属性が存在する。
-これを利用して、あるリソースが完了したら、別のリソースを実行することができる
-トリガーみたいかな？？。
+## Attribute
+
+http://docs.opscode.com/chef/dsl_recipe.html  
+
+OSの種類をチェックする。
+
+```Ruby
+case node["platform"]
+when "debian", "ubuntu"
+  # do debian/ubuntu things
+when "redhat", "centos", "fedora"
+  # do redhat/centos/fedora things
+end
+
+case node["platform_family"]
+when "debian"
+  # do things on debian-ish platforms (debian, ubuntu, linuxmint)
+when "rhel"
+  # do things on RHEL platforms (redhat, centos, scientific, etc)
+end
+
+# 32bit or 64bit
+node['kernel']['machine'] =~ /x86_64/ ? "x86_64" : "i386"
+
+```
+
+
+## Recipe
+
+### Notifie
+
+http://www.engineyard.co.jp/blog/2013/chef-recipe-lifecycle/  
+http://docs.opscode.com/chef/resources.html#notifications  
+notifiesというResorce内で利用出来る属性が存在する。  
+これを利用して、あるリソースが完了したら、別のリソースを実行することができる  
+トリガーみたいかな？？。  
 
 ```Ruby
 resource "name" do
@@ -139,7 +166,27 @@ template "/etc/www/configures-apache.conf" do
 end
 ```
 
-#### yum or apt-get
+### リソースの実行の条件(only_if, not_if)
+
+* only_if ifと同じ  
+* not_if  unlessと同じ
+
+色々な書き方。
+
+```Ruby
+not_if "grep adam /etc/passwd", :user => 'adam'
+not_if "grep adam /etc/passwd", :group => 'adam'
+not_if "grep adam /etc/passwd", :environment => { 'HOME' => "/home/adam" }
+not_if "grep adam passwd", :cwd => '/etc'
+not_if "sleep 10000", :timeout => 10
+not_if { node[:some_value] }
+not_if do
+    File.exists?("/etc/passwd")
+end
+not_if {::File.exists?("/etc/passwd")}
+```
+
+### yum もしくは apt-getでのインストール
 yumやapt-getでインストールする物はすべてpackageを利用すればよい。
 さらに複数パッケージをインストールするときは以下のようにfor文で記入すればよい。  
 
@@ -151,7 +198,23 @@ yumやapt-getでインストールする物はすべてpackageを利用すれば
 end
 ```
 
-#### source install  
+packageは他にもサポートしている。  
+直接リソース名を変更することもかのだが、  
+packageのproviderを変更することで同じ処理を行うことができる。
+
+```Ruby
+package "tar" do
+  provider Chef::Provider::Package::Yum
+  action :install
+end
+
+yum_package "tar" do
+  action :install
+end
+```
+
+
+### ソースコードからのインストール  
 参考
 http://stackoverflow.com/questions/8530593/chef-install-and-update-programs-from-source  
 直接tar.gzファイルなどからmakeなどでインストールする場合、以下の通りにするとよい。  
@@ -183,7 +246,7 @@ end
 perlbrewやrbenvはユーザー単位ので管理を行いたい
 コマンド(rbenv install etc..)を
 
-```
+```Ruby
    execute "ruby install #{v}" do
      user node['user']
      group node['group']
@@ -194,7 +257,7 @@ perlbrewやrbenvはユーザー単位ので管理を行いたい
    end
 ```
 
-### Custom Resource
+### カスタムリソース
 
 
 https://wiki.opscode.com/display/chef/Lightweight+Resources+and+Providers+(LWRP)
@@ -219,7 +282,7 @@ http://docs.opscode.com/lwrp_custom_resource.html
 
 #### resources
 
-```resources/test.rb
+```Ruby:resources/test.rb
 # ここで利用出来るアクションの設定
 # actions :action_name1, :action_name2, :action_name...
 actions :foo, :bar
@@ -237,11 +300,10 @@ attribute :type, :kind_of => String, :default => "bar"
 :name_attribute => trueとは、リソースの後に追加される文字列のこと
 以下では”test foo”が該当する。
 
-```
+```Ruby
 custom_resource_test "test foo" do
 end
 ```
-
 
 
 #### providers
@@ -249,7 +311,7 @@ end
 new_resource.attribute_nameでresources/test.rbに
 設定している
 
-```providers/test.rb
+```Ruby:providers/test.rb
 # resources/test.rbで定義したアクションの処理を記述
 # new_resource.nameは以下の “test foo”の部分と一致する
 # custom_resource_test "test foo" do
@@ -274,13 +336,13 @@ end
 
 #### recipes
 
-COOKBOOKNAME_FILENAMEがリソース名となる。
-FILENAMEがdefault.rbの場合、COOKBOOKNAMEがリソース名。
-今回は、custom_resourceがCOOKBOOKNAMEで
-providers/test.rbとresources/test.rbがあるため
-リソース名は`custom_resource_test`となる
+COOKBOOKNAME_FILENAMEがリソース名となる。  
+FILENAMEがdefault.rbの場合、COOKBOOKNAMEがリソース名。  
+今回は、custom_resourceがCOOKBOOKNAMEで  
+providers/test.rbとresources/test.rbがあるため  
+リソース名は`custom_resource_test`となる  
 
-```recipes/default.rb
+```Ruby:recipes/default.rb
 custom_resource_test "test foo" do
 end
 
@@ -293,7 +355,7 @@ end
 Chefのバージョンによってdefault_actionの書き方が異なるので *注意* 。
 ただ現状はif defined?(default_action)がなくても動く。
 
-```
+```Ruby
 actions :create, :destroy
 default_action :create if defined?(default_action) # Chef > 10.8
  
@@ -304,13 +366,30 @@ def initialize(*args)
 end
 ```
 
+### Try and Catch
+
+[参考はこちら](http://stackoverflow.com/questions/19944517/how-to-tell-chef-to-take-an-action-if-the-desired-package-to-install-doesnt-exi)  
+
+
+```Ruby
+begin
+   package 'some-package-name' do
+     action :install
+   done
+rescue Chef::Exception
+   # Do something here
+end
+```
+
+
+
 ## Test-Kitchen
 
 複数のプラットフォームでテストができる。
 あくまでレシピを実行するだけ。
 設定ファイルは`.kitchen.yml`である
 
-```
+```Bash
 $ kitchen init
 	create  .kitchen.yml
    	append  Thorfile
@@ -353,7 +432,7 @@ http://serverspec.org/
 * Vagrantのインスタンス(Yes/No)
 * Vagrantfileの設定を利用する(Yes/No)
 
-```
+```Bash
 $ serverspec-init
 Select OS type:
 
@@ -406,7 +485,7 @@ end
 テストの実行は`rake spec`or`rspec`です。　　
 以下は上のテストコードが失敗したときのログです。　　
 
-```
+```Bash
 $ rake spec
 
 Failures:
@@ -442,7 +521,7 @@ cookbook 'nginx', '~> 1.8.0'
 
 新しいCookBookの作成
 
-```
+```Bash
 $ berks cookbook new_app
 $ cd new_app
 $ tree .
@@ -467,6 +546,7 @@ $ tree .
 └── templates
     └── default
 ```
+
 通常のcookbookに加え、VagrantFileなどが追加される。
 
 ## foodcritic
@@ -496,7 +576,7 @@ string,style)
 
 カレントディレクトリ以下の構文チェックを行う
 
-```
+```Bash
 $ foodcritic -f any .
 # ルールを除外する場合は ~を利用する
 $ foodcritic -f any -f ~FC014
