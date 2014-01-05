@@ -282,7 +282,8 @@ http://docs.opscode.com/lwrp_custom_resource.html
 
 #### resources
 
-```Ruby:resources/test.rb
+```Ruby
+# resources/test.rb
 # ここで利用出来るアクションの設定
 # actions :action_name1, :action_name2, :action_name...
 actions :foo, :bar
@@ -311,7 +312,8 @@ end
 new_resource.attribute_nameでresources/test.rbに
 設定している
 
-```Ruby:providers/test.rb
+```Ruby
+# providers/test.rb
 # resources/test.rbで定義したアクションの処理を記述
 # new_resource.nameは以下の “test foo”の部分と一致する
 # custom_resource_test "test foo" do
@@ -342,7 +344,8 @@ FILENAMEがdefault.rbの場合、COOKBOOKNAMEがリソース名。
 providers/test.rbとresources/test.rbがあるため  
 リソース名は`custom_resource_test`となる  
 
-```Ruby:recipes/default.rb
+```Ruby
+# recipes/default.rb
 custom_resource_test "test foo" do
 end
 
@@ -400,7 +403,8 @@ $ kitchen init
 $ kitchen test
 ```
 
-```Ruby:.kitchen.yml
+```Ruby
+# .kitchen.yml
 ---
 driver:
   name: vagrant
@@ -473,7 +477,8 @@ end
 テストの書き方
 http://serverspec.org/resource_types.html
 
-```Ruby:spec/*/*_spec.rb
+```Ruby
+# spec/*/*_spec.rb
 # これ必須
 require 'spec_helper'
 # 以下テスト用のリソースを記入
