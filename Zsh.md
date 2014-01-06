@@ -18,7 +18,7 @@ $ echo $SHELL #ログイン処理を表示
 
 /etc/zshenv  
 ~/.zshenv  
-/etc/zprofile ログイン時のみ  
+/etc/zprofile  
 ~/.zprofile  
 /etc/zshrc  
 ~/.zshrc  
