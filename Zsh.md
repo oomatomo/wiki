@@ -16,23 +16,23 @@ $ echo $SHELL #ログイン処理を表示
 
 ### 移動
 
-Ctrl+a # 先頭へ
-Ctrl+e # 行末へ
-Ctrl+p #カーソル上
-Ctrl+n #カーソル下
-Ctrl+f #カーソル右
-Ctrl+b #カーソル左
+* Ctrl+a # 先頭へ  
+* Ctrl+e # 行末へ  
+* Ctrl+p #カーソル上  
+* Ctrl+n #カーソル下  
+* Ctrl+f #カーソル右  
+* Ctrl+b #カーソル左  
 
 ### 文字列操作
 
-Ctrl+u # その行全部切り取り
-Ctrl+y # ペースト
-Ctrl+/ # 一つ前に元に戻る
-Ctrl+k # カーソルから行末までの文字を切り取り
-Ctrl+h # 左の文字を削除
-Ctrl+d # 右の文字を削除
-Ctrl+w # 左の単語を切り取り
-Meta+d # 右の単語を切り取り
+* Ctrl+u # その行全部切り取り  
+* Ctrl+y # ペースト  
+* Ctrl+/ # 一つ前に元に戻る  
+* Ctrl+k # カーソルから行末までの文字を切り取り  
+* Ctrl+h # 左の文字を削除  
+* Ctrl+d # 右の文字を削除  
+* Ctrl+w # 左の単語を切り取り  
+* Meta+d # 右の単語を切り取り  
 
 
 ## .zshrc
