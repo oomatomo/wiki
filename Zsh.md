@@ -88,7 +88,6 @@ setopt auto_param_slash     # ディレクトリ名の補完で末尾に/を自�
 setopt correct              # コマンドのスペルを訂正する
 setopt equals               # =commandを`which command`と同じ処理
 setopt globdots             # ドットの指定なしでドットファイルも候補に入る
-setopt hist_expand          # 補完時にヒストリを自動的に展開する
 setopt interactive_comments # コマンドラインでの#以降をコメントと見なす
 setopt list_types           # 候補にファイルの種別を表示(ls -F)
 setopt list_packed          # 補完結果をできるだけ詰める
@@ -104,17 +103,50 @@ setopt pushd_ignore_dups    # ディレクトリスタックに重複する物�
 
 ### 履歴関連
 
+
 ```Bash
 HISTFILE=~/.zsh_history     # ヒストリファイルを指定
 HISTSIZE=10000              # ヒストリに保存するコマンド数
 SAVEHIST=10000              # ヒストリファイルに保存するコマンド数
-setopt hist_ignore_dups     # 履歴の重複する行を無視
-setopt bang_hist            # !を使ったヒストリ展開を行う(d)
-setopt extended_history     # ヒストリに実行時間も保存する
-setopt hist_ignore_dups     # 直前と同じコマンドはヒストリに追加しない
+# 履歴をたどる
+autoload -Uz history-search-end
+bindkey -M vicmd 'k' history-beginning-search-backward
+bindkey -M vicmd 'j' history-beginning-search-forward
+# Ctrl+rでワイルドカードのインクリメントサーチが可能
+bindkey -M vicmd 'll' history-incremental-pattern-search-backward
+bindkey -M vicmd 'LL' history-incremental-pattern-search-forward
+
+# 途中入力のコマンドを元に履歴をたどる
+bindkey -M vicmd '^P' up-line-or-history
+bindkey -M vicmd '^N' down-line-or-history
+
+# 
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey -M vicmd '^P' up-line-or-beginning-search
+bindkey -M vicmd '^N' down-line-or-beginning-search
+
+
+# 履歴のシェルオプション
+
+setopt bang_hist            # !を使った履歴展開を行う(d)
+setopt extended_history     # 履歴に実行時間も保存する
+setopt hist_ignore_dups     # 直前と同じコマンドは履歴に追加しない
+setopt hist_reduce_blanks   # 余分なスペースを削除して履歴に保存する
+setopt hist_no_store        # historyコマンドは履歴に登録しない
+setopt hist_expand          # 補完時に履歴を自動的に展開
+setopt hist_ignore_dups     # 入力したコマンドが直前のものと同一なら履歴に登録しない
+setopt hist_save_no_dups    # 古いコマンドと同じものは無視
+setopt hist_find_no_dups    # ラインエディタでヒストリ検索し、ヒットし場合重複したものとみなす
+setopt hist_ignore_all_dups # 入力したコマンドを履歴に登録する時、同一がすでに存在した場合登録しない
+setopt hist_no_functions    # 関数定義のためのコマンドは履歴から削除する
+setopt hist_no_store        # 履歴参照のコマンドは履歴に登録しない
+setopt hist_reduce_blanks   # コマンド中の余分な空白を削除する
+setopt inc_append_history   # 履歴をインクリメンタルに追加
 setopt share_history        # 他のシェルのヒストリをリアルタイムで共有する
-setopt hist_reduce_blanks   # 余分なスペースを削除してヒストリに保存する
 ```
+
 
 ### 補完機能の設定
 
@@ -124,7 +156,16 @@ autoload -U compinit; compinit
 ```
 
 zstyleでの補完機能の以下の構文となっている。  
-`zstyle ':completion:function:completer:command:argument:tag’`　　
+```Bash
+# 3種類の設定する部分がある
+zstyle Pattern Style Value
+# Patternはさらに詳細に分割できる 　　
+zstyle ':completion:function:completer:command:argument:tag’ style value
+# 実際の設定
+zstyle ':completion:*:rm:*’ menu true
+```
+
+### Pattern
 
 * completion 補完システムの設定を行うための固定文。  
 * function ウィジェットからの関数名  
@@ -133,21 +174,111 @@ zstyleでの補完機能の以下の構文となっている。
 * argument  引数
 * tag  タグ
 
+ただし実際の記入する際は短縮することが出来る。  
 
 ```Bash
+
 # 一覧表示でグループ化を行う
 zstyle ':completion:*' group-name ''
 # グループ化での説明を追加出来る %dに説明が入る
-zstyle ':completion:*:descriptions' format 'Completing %d' 
+zstyle ':completion:*:descriptions' format 'Completing %d'
+
+zstyle ':completion:*' list-separator '-->' # オプションの補完時のデザイン
+zstyle ':completion:*:manuals' separate-sections true # 設定したデザインの表示を許可する
+
+zstyle ':completion:*:setopt:*' menu true select # 補完のメニューが表示されるかつ選択を行うことができる
+
+```
+
+### カラー
+
+```Bash
+# 色の有効化
+autoload -U colors; colors
+
+# 色の設定
+zstyle ':completion:*:default*' list-colors di=4 ex=33
+# もしくは
+export LS_COLORS='di=4 ex=33'
+zstyle ':completion:*:default*' list- ${(s.:.)LS_COLORS}
+```
+
+|種別   |意味|
+|*-----*|*-----------------*|  
+| no    |標準色 |  
+| fi    |通常ファイル|  
+| di    |ディレクトリ|  
+| ex    |実行ファイル|  
+| ln    |シンボリックリンクファイル|  
+| pi    |パイプファイル|  
+| so    |ソケットファイル|
+| bd    |ブロックデバイス|
+| cd    |キャラクタデバイス|
+| tc    |ファイルの種別を示す記号|
+| sp    |候補単語間の空白|
+|=パターン|パターンにマッチする候補|
+
+
+色の確認
+
+```Bash
+for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && echo;done;echo
 ```
 
 ### バインドキー
 
-zshの操作方法には２種類ある。
-viモードとemacsモードです。
+zshの操作方法には2種類ある。  
+viモードとemacsモードです。デフォルトはemacsモードです。  
 
 ```Bash
+bindkey -e # emacs
+bindkey -v # vi
+```
 
+キーの割り当て確認は以下のコマンドを実行すると良い。  
+
+```Bash
+bindkey -M emacs
+bindkey -M vicmd
+bindkey -M viins
+# 別途で補完メニュー選択時のキーバインドも存在する
+bindkey -M menuselect 
+```
+
+#### vicmd と viins　の違い
+
+vicmdはviのノーマルモード、viinsはインサートモード
+
+```Bash
+# emacs
+
+# vicmd時のバインドキーの設定
+bindkey -M vicmd '設定するキー' 行う処理
+# viins時のバインドキーの設定
+bindkey -M viins '設定するキー' 行う処理
+```
+
+viモードのステータスを分かりやすくする
+[zshのViモードをインターフェイスとして利用してみる](http://qiita.com/PSP_T/items/8cc534c2c30543965950)
+
+```Bash
+function zle-line-init zle-keymap-select {
+　　　VIM_NORMAL="%K{208}%F{black}⮀%k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208}⮀%k%f"
+    VIM_INSERT="%K{075}%F{black}⮀%k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075}⮀%k%f"
+    RPS1="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+```
+
+#### 補完メニューでのキーバインド
+
+```
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
 ```
 
 ## 参考
@@ -164,28 +295,30 @@ https://github.com/robbyrussell/oh-my-zsh
 $ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 ```
 
-
 ### theme
 
 テーマの一覧表示
 
 ```Bash
-$ ./theme_chooser.sh -s
+$ ZSH=~/.oh-my-zsh ./theme_chooser.sh -s
 ```
 
-### color
+### plugins
 
-カラー一覧を見ることができるシェルスクリプト  
+oh-my-zshにはプラグインが存在する。使い方は簡単である。  
 
 ```Bash
-for i in $(seq 0 8 255); do
-  for j in $(seq $i $(expr $i + 7)); do
-    for k in $(seq 1 $(expr 7 - ${#j})); do
-            printf " "
-    done
-    printf "\x1b[38;5;${j}mcolour${j}"
-    [[ $(expr $j % 8) != 7 ]] && printf "    "
-  done
-  printf "\n"
-done
+# ~/.zshrc
+plugins=( プラグイン名 )
 ```
+
+これでおｋ  
+
+### カスタマイズ
+
+.oh-my-zsh/custom以下のとなる  
+
+本来の.zshrcの設定を行いたい場合は`.oh-my-zsh/custom/custom.zsh`に記入する。  
+
+theme の場合は、`.oh-my-zsh/custom/themes/`に`NAME.zsh-theme`を追加する。  
+pluginの場合は、`.oh-my-zsh/custom/plugins/`にプラグインのリポジトリを追加する。  
