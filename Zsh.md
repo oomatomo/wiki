@@ -1,13 +1,11 @@
-Zsh
-=====
-
-zshについてのwiki
+# Zsh
+## zshについてのwiki
 
 ### install
 
 yum or apt-getで簡単にインストール出来る。  
 
-```Bash
+```bash
 # yum -y install zsh
 # chsh -s /bin/zsh username
    or
@@ -16,12 +14,13 @@ $ chsh -s /bin/zsh
 $ echo $SHELL #ログイン処理を表示
 ```
 
-## 事前知識
+### 事前知識
 
 ### zshの利点
 
 * 高速（タブ補完など）  
 * カスタマイズが楽  
+
 
 ### 設定ファイルの読み込みについて
 
@@ -45,9 +44,7 @@ $ echo $SHELL #ログイン処理を表示
 * ~/.zlogin   
 ログイン時にただの一度だけ行えばよい設定。  
 
-
-ショートカット
----
+### ショートカット
 
 ### 移動
 
@@ -69,9 +66,7 @@ $ echo $SHELL #ログイン処理を表示
 * Ctrl+w # 左の単語を切り取り  
 * Meta+d # 右の単語を切り取り  
 
-
-.zshrc
----
+### .zshrc
 
 設定を記入する
 
@@ -86,17 +81,17 @@ $ echo $SHELL #ログイン処理を表示
 
 シェルオプションで簡単に設定可能。  
 
-* setopt　オプションの有効
-* unsetopt　オプションの無効
+* setopt　オプションの有効  
+* unsetopt　オプションの無効  
 
-```Bash
+```bash
 setopt 設定したい値
 unsetopt 無効にしたい値
 ```
 
 ### 色々なシェルオプション
 
-```Bash
+```bash
 setopt auto_menu            # タブで補完候補を表示する
 setopt auto_cd              # ディレクトリ名のみ入力時、cdを適応させる
 setopt auto_list            # 補完候補が複数ある時に、一覧表示
@@ -124,7 +119,7 @@ setopt pushd_ignore_dups    # ディレクトリスタックに重複する物�
 zshの操作方法には2種類ある。  
 viモードとemacsモードです。デフォルトはemacsモードです。  
 
-```Bash
+```bash
 # モード選択
 bindkey -e # emacs
 bindkey -v # vi
@@ -132,7 +127,7 @@ bindkey -v # vi
 
 キーの割り当て確認は以下のコマンドを実行すると良い。  
 
-```Bash
+```bash
 bindkey -M emacs
 bindkey -M vicmd
 bindkey -M viins
@@ -142,7 +137,7 @@ bindkey -M menuselect
 
 bindkeyはの設定の方法はいくつかある。
 
-```Bash
+```bash
 bindkey -M 'モード(vi?emacs?)' '設定したいキー'　'実行する関数'
 # Ctrl+aでend-of-line(行末に移動する)が実行される。
 bindkey -M -e '^a' end-of-line
@@ -152,7 +147,7 @@ bindkey -M -e '^a' end-of-line
 
 vicmdはviのノーマルモード、viinsはインサートモード
 
-```Bash
+```bash
 # emacs
 bindkey -M emacs '設定するキー' '実行する関数'
 # vicmd時のバインドキーの設定
@@ -165,7 +160,7 @@ viモードのステータスを分かりやすくする
 
 [zshのViモードをインターフェイスとして利用してみる](http://qiita.com/PSP_T/items/8cc534c2c30543965950)
 
-```Bash
+```bash
 function zle-line-init zle-keymap-select {
 　　　VIM_NORMAL="%K{208}%F{black}⮀%k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208}⮀%k%f"
     VIM_INSERT="%K{075}%F{black}⮀%k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075}⮀%k%f"
@@ -187,12 +182,12 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 ```
 
-## zle
+### zle
 
 自分でカスタマイズした関数や既存の関数をzshで呼び出せるようにします。
 ちなみにzleで機能しているものの単位をウィジェットといいます。
 
-```Bash
+```bash
 
 zle -N WIDGET [FUNCTION]
 # ウィジェットと関数名を同一にしたくないなら第2引数に関数名を記入
@@ -201,7 +196,7 @@ zle -N WIDGET [FUNCTION]
 
 ### 履歴関連
 
-```Bash
+```bash
 HISTFILE=~/.zsh_history     # ヒストリファイルを指定
 HISTSIZE=10000              # ヒストリに保存するコマンド数
 SAVEHIST=10000              # ヒストリファイルに保存するコマンド数
@@ -227,9 +222,9 @@ bindkey -M vicmd '^P' up-line-or-beginning-search
 bindkey -M vicmd '^N' down-line-or-beginning-search
 ```
 
-履歴に関してのシェルオプション
+### 履歴に関してのシェルオプション
 
-```Bash
+```bash
 # 履歴のシェルオプション
 setopt bang_hist            # !を使った履歴展開を行う(d)
 setopt extended_history     # 履歴に実行時間も保存する
@@ -249,17 +244,16 @@ setopt share_history        # 他のシェルのヒストリをリアルタイ�
 
 ```
 
-
 ### 補完機能の設定
 
-```Bash
+```bash
 # 必須
 autoload -U compinit; compinit
 ```
 
 zstyleでの補完機能の以下の構文となっている。  
 
-```Bash
+```bash
 # 3種類の設定する部分がある
 zstyle Pattern Style Value
 # Patternはさらに詳細に分割できる 　　
@@ -280,7 +274,7 @@ zstyle ':completion:*:使うコマンド:*' スタイル 値
 
 ただし実際の記入する際は短縮することが出来る。  
 
-```Bash
+```bash
 
 # 一覧表示でグループ化を行う
 zstyle ':completion:*' group-name ''
@@ -301,7 +295,7 @@ zstyle ':completion:*:descriptions' format '%F{YELLOW}Completing %B%d%b%f'$DEFAU
 
 ### カラー
 
-```Bash
+```bash
 # 色の有効化
 autoload -U colors; colors
 
@@ -325,10 +319,9 @@ zstyle ':completion:*:default*' list- ${(s.:.)LS_COLORS}
 * sp        候補単語間の空白  
 * =パターン パターンにマッチする候補  
 
+### 色の確認
 
-色の確認
-
-```Bash
+```bash
 for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && echo;done;echo
 ```
 
@@ -338,14 +331,13 @@ https://wiki.archlinux.org/index.php/Zsh_(%E6%97%A5%E6%9C%AC%E8%AA%9E)
 
 ### oh-my-zsh
 
-
 ### install
 
 https://github.com/robbyrussell/oh-my-zsh  
 
 [wiki](https://github.com/robbyrussell/oh-my-zsh/wiki/_pages)  
 
-```Bash
+```bash
 $ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 $ source ~/.zshrc
 ```
@@ -382,8 +374,8 @@ https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 
 テーマの一覧表示
 
-```Bash
-$ ZSH=~/.oh-my-zsh ./theme_chooser.sh -s
+```bash
+$ ZSH=~/.oh-my-zsh ~/.oh-my-zsh/tools/theme_chooser.sh -s
 ```
 
 テーマの変更(~/.zshrcを編集)
@@ -392,7 +384,7 @@ ZSH_THEMEの値を変更するといい。
 
 `テーマ名.zsh-theme`となっている・
 
-```Bash
+```bash
 ZSH_THEME="ooma"
 ```
 
@@ -403,7 +395,7 @@ https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 oh-my-zshにはプラグインが存在する。使い方は簡単である。  
 ~/.zshrcを編集する。
 
-```Bash
+```bash
 plugins=( プラグイン名 )
 ```
 
@@ -432,14 +424,14 @@ https://github.com/zsh-users/zsh-syntax-highlighting
 
 デフォルトのプラグインではないため、`.oh-my-zsh/custom/plugins`にcloneする。
 
-```Bash
+```bash
 $ cd ~/.oh-my-zsh/custom/plugins
 $ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 ```
 
 ~/.zshrcを編集する。
 
-```Bash
+```bash
 plugins=( zsh-syntax-highlighting )
 ```
 
@@ -449,13 +441,13 @@ plugins=( zsh-syntax-highlighting )
 
 https://github.com/tarruda/zsh-autosuggestions
 
-```Bash
+```bash
 $ git clone git://github.com/tarruda/zsh-autosuggestions ~/.oh-my-zsh/custom/zsh-autosuggestions
 ```
 
 .oh-my-zsh/custom/custom.zshの変更を行う
 
-```
+```bash
 source ~/.oh-my-zsh/custom/zsh-autosuggestions/autosuggestions.zsh
 
 zle-line-init() {
