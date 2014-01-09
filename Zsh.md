@@ -347,6 +347,7 @@ https://github.com/robbyrussell/oh-my-zsh
 
 ```Bash
 $ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+$ source ~/.zshrc
 ```
 
 $HOME/.oh-my-zshに生成される。
