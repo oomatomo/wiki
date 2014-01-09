@@ -12,6 +12,7 @@ yum or apt-getで簡単にインストール出来る。
 # chsh -s /bin/zsh username
    or
 $ chsh -s /bin/zsh
+# exitしてログインしなおす
 $ echo $SHELL #ログイン処理を表示
 ```
 
