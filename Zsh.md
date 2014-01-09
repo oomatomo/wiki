@@ -299,9 +299,6 @@ zstyle ':completion:*:descriptions' format '%F{YELLOW}Completing %B%d%b%f'$DEFAU
 
 ```
 
-### どんな設定があるか確認する方法
-
-
 ### カラー
 
 ```Bash
@@ -346,6 +343,8 @@ https://wiki.archlinux.org/index.php/Zsh_(%E6%97%A5%E6%9C%AC%E8%AA%9E)
 
 https://github.com/robbyrussell/oh-my-zsh  
 
+[wiki](https://github.com/robbyrussell/oh-my-zsh/wiki/_pages)  
+
 ```Bash
 $ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 $ source ~/.zshrc
@@ -370,7 +369,16 @@ $HOME/.oh-my-zshに生成される。
 
 ```
 
+custom    --> カスタマイズ用の設定ファイルはここに格納する  
+lib       --> デフォルトの設定  
+plugins   --> プラグインが格納されている.zshrcの設定から選択出来る  
+templates --> インストール時に.zshrcとなるファイルがある  
+themes    --> テーマが格納されている  
+tools     --> インストールのシェルスクリプトやテーマの一覧が見れるツールなどがある  
+
 ### theme
+
+https://github.com/robbyrussell/oh-my-zsh/wiki/themes  
 
 テーマの一覧表示
 
@@ -389,6 +397,8 @@ ZSH_THEME="ooma"
 ```
 
 ### plugins
+
+https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins  
 
 oh-my-zshにはプラグインが存在する。使い方は簡単である。  
 ~/.zshrcを編集する。
