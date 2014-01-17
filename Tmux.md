@@ -1,5 +1,6 @@
 title: Tmux
 output: tmux.html
+
 --
 # tmux
 --
@@ -126,9 +127,12 @@ C-b Space
 コピーモードには`C-b [`で入ることが出来る  
 Spaceキーでコピーの始点を設定し、Enterでコピーの終点を決める  
 貼付けは`C-b ]`で出来る  
+
 --
 ### 参考
+
 http://d.hatena.ne.jp/eco31/20101126/1290725841
+
 --
 ### tmuxの設定
 設定ファイルは`~/.tmux.conf`  
@@ -142,12 +146,12 @@ bind-key C-q send-prefix
 ```
 --
 #### 設定方法
-* set-option  
+* set-option ( setでも可 )  
 セッションオプションを設定します  
 引数  
 -g グローバルなセッションオプションに設定  
 -u 設定を解除する  
-* set-window-option  
+* set-window-option ( setwでも可 )   
 ウィンドウオプションを設定します  
 引数はset-optionと同じ  
 
