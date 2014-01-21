@@ -57,6 +57,17 @@ $ make
 $ sudo make install
 ```
 
+#### centos6.5でエラー
+以下の方法で./configureを行ったらインストールできた
+
+```bash
+# libevent2の指定
+./configure --prefix=/usr/local
+ 
+# tmuxの指定
+LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
+```
+
 --
 ###  InstallでのError
 
