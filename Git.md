@@ -1,5 +1,54 @@
 # Git
 
+## Install
+
+yumでインストールする
+
+```bash
+$ sudo yum install git
+```
+
+ソースコードからインストールする
+
+[コードはこちら](https://code.google.com/p/git-core/downloads/list)
+
+今回は git-1.8.5.3.tar.gzをインストールしました  
+
+すでにyumでインストールを行っている場合はyumでgit-coreをremoveする  
+
+```
+$ sudo yum remove git-core
+```
+
+インストールは以下の通りです  
+
+```
+$ sudo yum install openssl097a.x86_64 openssl-perl.x86_64 curl-devel
+$ wget https://git-core.googlecode.com/files/git-1.8.5.3.tar.gz
+$ tar zxf git-1.8.5.3.tar.gz
+$ cd git-1.8.5.3 && ./configure && make && sudo make install
+```
+
+`openssl1097a.x86_64`と`openssl-perl.x86_64`は以下のエラーが出たためインストールを行った  
+
+
+```
+$ git clone https://github.com/oomatomo/perl-test.git
+Cloning into 'perl-test'
+fatal: Unable to find remote helper for 'https'
+```
+
+## Config
+
+```
+# Globalな設定
+$ git config --global user.name "oomaotmo"
+$ git config --global user.email oomatomo@gmail.com
+
+# remoteのURL変更
+$ git remote set-url origin URL
+```
+
 ## Log
 
 ```Bash
