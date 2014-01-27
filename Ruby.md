@@ -29,7 +29,7 @@ When run without a version number, rbenv global reports the currently configured
 /opt/vagrant_ruby/bin/がすでに$PATHに設定されているため、
 削除する必要がある。(rbenv global 2.0.0-p247が反映されないため)
 
-#### windowsのインストールで失敗
+## windowsのインストールで失敗
 
 
 ```
