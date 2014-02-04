@@ -76,6 +76,21 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+### windowsでネット接続が遅い場合
+
+以下の設定で解消できる  
+
+```
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
+```
+
+参考URL  
+[vagrant-slow-internet-connection-in-guest](http://serverfault.com/questions/495914/vagrant-slow-internet-connection-in-guest)  
+[vagrant-virtualbox-dns-10-0-2-3-not-working](http://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working)  
+
+
 ## プラグイン  
 
 ```
