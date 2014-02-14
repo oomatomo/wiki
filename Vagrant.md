@@ -91,6 +91,19 @@ end
 [vagrant-virtualbox-dns-10-0-2-3-not-working](http://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working)  
 
 
+### Disk追加( VirtualBox )
+
+
+```
+file_to_disk = './box-disk3.vmdk'
+unless File.exist?(file_to_disk)
+  vb.customize [ "createhd", "--filename", file_to_disk, "--size", 80*1024 ]
+end
+vb.customize ['storageattach', :id, '--storagectl', 'SATA', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+
+```
+
+
 ## プラグイン  
 
 ```
