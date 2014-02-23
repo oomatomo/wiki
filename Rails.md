@@ -6,6 +6,8 @@ Rails
 
 * rails new [app]  
    Appのひな形作成  
+   rails new [app] --database=mysql --skip-bundle  
+   DBをmysqlにbundle installをスキップしてくれる
 * rails generate scaffold page name:string title:string  
    controllerとmodelを作成してくれる  
 * rails generate model page name:string title:string  
