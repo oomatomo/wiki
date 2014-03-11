@@ -40,3 +40,17 @@ SHA256(tmux-1.8.tar.gz)=f265401ca890f8223e09149fcea5abcd6dfe75d597ab106e172b01e9
 $ chmod 700 ~/.ssh
 $ chmod 600 ~/.ssh/authorized_keys
 ```
+
+## scp
+
+-r ディレクトリの再帰的コピー
+-v 詳細
+
+```Bash
+# ローカルからリモートへ
+$ scp -r ./test tomo@test.com:/home/tomo
+
+# リモートかローカルへ
+$ scp -r tomo@test.com:/home/tomo /test
+```
+
