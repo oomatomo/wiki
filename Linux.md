@@ -54,3 +54,9 @@ $ scp -r ./test tomo@test.com:/home/tomo
 $ scp -r tomo@test.com:/home/tomo /test
 ```
 
+## tcpdump
+
+```Bash
+ sudo tcpdump -i eth1  -s 0 -l -A dst port 3306
+```
+
