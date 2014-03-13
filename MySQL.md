@@ -21,3 +21,9 @@ $ yum localinstall ...
 > update user set Password=PASSWORD('ooma') where Host='localhost' and User='root';
 
 ```
+
+## 外部アクセス
+
+```
+> GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY 'root のパスワード' WITH GRANT OPTION;
+```
