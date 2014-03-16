@@ -10,8 +10,8 @@ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-rbenv install 2.0.0-p357
-rbenv global 2.0.0-p357
+rbenv install 2.0.0-p353
+rbenv global 2.0.0-p353
 ```
 
 以下を`.zshrc`などに追記しておく。  
