@@ -1,15 +1,15 @@
 # linux
 
-## yum 
+### yum 
 
 ```Bash
 $ rpm -Uhv http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 $ rpm -Uhv http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 ```
 
-## user
+### user
 
-### user add
+user add
 
 -u userIDの指定  
 -m --create-home ホームディレクトリの作成  
@@ -19,8 +19,7 @@ $ rpm -Uhv http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.r
 $ useradd -u 1004 -m -s /bin/bash tomo
 ```
 
-### usermod
-
+usermod
 
 ```Bash
 # ログイン禁止
@@ -31,10 +30,19 @@ $ passwd -u tomo
 $ usermod -s /bin/bash tomo
 ```
 
-### パスワード
+パスワード
 
 ```Bash
 $ useradd -u 1004 -m -s /bin/bash tomo
+```
+
+リスト
+
+```Bash
+# user list
+$ cat /etc/passwd | cut -d: -f1
+# group list
+$ cat /etc/group |cut -d: -f1
 ```
 
 ### netstat
@@ -46,8 +54,8 @@ $ useradd -u 1004 -m -s /bin/bash tomo
 -s 不要なデータを省く
 -r 読み込むデータ量を指定
 
-## Security
-### get checksum
+### Security
+#### get checksum
 
 ```Bash
 $ sudo yum install openssl
@@ -55,14 +63,14 @@ $ openssl dgst -sha256 tmux-1.8.tar.gz
 SHA256(tmux-1.8.tar.gz)=f265401ca890f8223e09149fcea5abcd6dfe75d597ab106e172b01e9d0c9cd44
 ```
 
-## ssh
+### ssh
 
 ```Bash
 $ chmod 700 ~/.ssh
 $ chmod 600 ~/.ssh/authorized_keys
 ```
 
-## scp
+### scp
 
 -r ディレクトリの再帰的コピー
 -v 詳細
@@ -75,13 +83,13 @@ $ scp -r ./test tomo@test.com:/home/tomo
 $ scp -r tomo@test.com:/home/tomo /test
 ```
 
-## tcpdump
+### tcpdump
 
 ```Bash
  sudo tcpdump -i eth1  -s 0 -l -A dst port 3306
 ```
 
-## sudo
+### sudo
 
 ```Bash
 # Passwordなし
