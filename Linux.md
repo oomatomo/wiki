@@ -9,18 +9,32 @@ $ rpm -Uhv http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.r
 
 ## user
 
-### not login 
+### user add
+
+-u userIDの指定
+-m --create-home ホームディレクトリの作成
+-s シェルの指定 
 
 ```Bash
-$ passwd -l tom
-$ usermod -s /sbin/nologin tom
+$ useradd -u 1004 -m -s /bin/bash tomo
 ```
 
-### allow login  
+### usermod
+
 
 ```Bash
-$ passwd -u tom
-$ usermod -s /bin/bash tom
+# ログイン禁止
+$ passwd -l tomo
+$ usermod -s /sbin/nologin tomo
+# ログイン許可
+$ passwd -u tomo
+$ usermod -s /bin/bash tomo
+```
+
+### パスワード
+
+```Bash
+$ useradd -u 1004 -m -s /bin/bash tomo
 ```
 
 ### netstat
