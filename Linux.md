@@ -11,9 +11,9 @@ $ rpm -Uhv http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.r
 
 ### user add
 
--u userIDの指定
--m --create-home ホームディレクトリの作成
--s シェルの指定 
+-u userIDの指定  
+-m --create-home ホームディレクトリの作成  
+-s シェルの指定   
 
 ```Bash
 $ useradd -u 1004 -m -s /bin/bash tomo
