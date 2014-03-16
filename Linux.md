@@ -1,5 +1,11 @@
 # linux
 
+## yum 
+
+```Bash
+$ rpm -Uhv http://mirrors.einstein.yu.edu/epel/6/i386/epel-release-6-8.noarch.rpm
+```
+
 ## user
 
 ### not login 
