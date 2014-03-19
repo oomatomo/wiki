@@ -62,6 +62,14 @@ $ git log --oneline --decorate --graph --branches --tags --remotes
 * --tags: tagを表示
 * --remotes: remote branchなどを表示
 
+```Bash
+$ git log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
+```
+* --graph: ツリー表示が付く
+* --all: 全てのログ。カレントのブランチだけに限らず。
+* --color: 色
+* --pretty: ログのフォーマット。%dが branch。
+
 ## Tag
 
 
