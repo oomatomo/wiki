@@ -53,11 +53,11 @@ $ tree .
 .
 ├── Berksfile
 ├── Berksfile.lock
-├── cookbooks　　　　#共通のcookbook berksfileなどで外部から取ってくるcookbook
+├── cookbooks
 ├── data_bags
 ├── nodes
 ├── roles
-└── site-cookbooks　　#特定のcookbooksつまり自分が作成したレシピはここに置いたほうがよい 
+└── site-cookbooks 
 
 # CookBook
 $ knife cookbook create hello -o ./site-cookbooks
@@ -85,6 +85,41 @@ $ tree .
     └── templates
         └── default
 ```
+
+Berksfile
+	公式サイトのopscodeからレシピを持ってきたレシピを定義するファイル。
+	githubから持ってくることも可能。
+	かなり便利。
+
+cookbooks
+	既にパッケージ化されたrecipeの格納場所。
+
+	利用するコマンド
+	knife cookbook site install COOKBOOK_NAME  	
+		opscodeに登録されているrecipeを持ってくる。
+		(Berksfileをメインに利用しています）
+
+	knife cookbook site download COOKBOOK_NAME 
+		tar.gzで直接ダウンロードされる。
+
+data_bags
+	環境のユーザーのデータの設定
+	（鍵の登録やシェルの指定など)
+
+nodes
+	node(管理対象のサーバ)ごとに実行させるレシピやAtrribut設定できる。
+	( rolesで一括することも出来る）
+	knife node list　で登録されているnodeが確認できる。
+
+roles
+	各nodeごとに実行するレシピなどをまとめることが出来る。
+	nodesにはサーバごとにjsonを作成しなければならないため、
+	同じ環境を設定したいサーバが複数存在する場合は同じ内容を各必要がある。
+	しかし、このroleを利用することで一カ所に設定をまとめられ
+	nodes側では設定されたroleを呼び出すだけでよい。
+
+site_cookbooks
+	自分で作成したrecipeの格納場所
 
 ## Node  
 
