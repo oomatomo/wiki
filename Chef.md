@@ -53,11 +53,11 @@ $ tree .
 .
 ├── Berksfile
 ├── Berksfile.lock
-├── cookbooks
+├── cookbooks　　　　#共通のcookbook berksfileなどで外部から取ってくるcookbook
 ├── data_bags
 ├── nodes
 ├── roles
-└── site-cookbooks
+└── site-cookbooks　　#特定のcookbooksつまり自分が作成したレシピはここに置いたほうがよい 
 
 # CookBook
 $ knife cookbook create hello -o ./site-cookbooks
