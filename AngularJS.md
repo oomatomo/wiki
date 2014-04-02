@@ -18,3 +18,14 @@ Validateが豊富
 
 invalid
 novalid
+
+
+## 豆知識
+
+### Slimでのrequiredの書き方
+
+Slimではrequiredの付与は以下のようになる
+
+```
+input#wikiname.form-control type='text' ng-model='wikiame' required=true
+```
