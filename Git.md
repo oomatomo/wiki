@@ -78,6 +78,40 @@ $ git log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
 $ git checkout TAG_NAME
 ```
 
+## rebase
+
+### 中止　もしくは　再開
+
+```
+$ git rebase --abort
+
+$ git rebase --continue
+```
+
+### コミットを一つに纏める
+
+```
+$ git rebase -i HEAD~3 #この場合は3つのコミットを纏めることになる
+```
+
+```
+pick 1ejdwoeijf <message>
+pick lawiejfoie <message>
+pick awjfojerof <message>
+```
+
+pickは残すコミットになるちなみに一番上が親のコミットである
+今回は3つのコミットを一つに纏めるため下二つのコミットをsquashで
+前のコミットとしてコミットする
+
+```
+pick 1ejdwoeijf <message>
+squash lawiejfoie <message>
+squash awjfojerof <message>
+``` 
+
+この後は通常のコミットメッセージ画面となる
+
 ## Error
 
 ### error: RPC failed; result=22, HTTP code = 405
