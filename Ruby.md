@@ -65,3 +65,14 @@ C:\Dev-Kit>ruby dk.rb install
 [INFO] Updating convenience notice gem override for 'C:/Ruby200-x64'
 [INFO] Installing 'C:/Ruby200-x64/lib/ruby/site_ruby/devkit.rb'
 ```
+
+
+## class && module
+
+クラスは、オブジェクトとしてインスタンス化できるが
+モジュールは、インスタンス化できない
+
+継承できるのはクラス。
+includeできるのはモジュールのみである
+
+
