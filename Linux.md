@@ -45,6 +45,14 @@ $ cat /etc/passwd | cut -d: -f1
 $ cat /etc/group |cut -d: -f1
 ```
 
+ログイン中のユーザ確認
+
+```Bash
+$ w
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+vagrant  pts/0    192.168.137.1    Thu09    0.00s  0.26s  0.00s tmux -2
+```
+
 ### netstat
 
 
