@@ -1,3 +1,55 @@
+Rails
+---
+
+基本操作
+---
+
+* rails new [app]  
+   Appのひな形作成  
+   `rails new [app] --database=mysql --skip-bundle`  
+   DBをmysqlにbundle installをスキップしてくれる
+* rails generate scaffold page name:string title:string  
+   controllerとmodelを作成してくれる  
+* rails generate model page name:string title:string  
+   modelの作成  
+   db/migrate/日付_create_page.rbができる  
+* rails generate controller Page  
+   controllerの作成  
+   `rails generate controller page title`  
+   controllerとviewの作成  
+   `rails generate controller 'admin/page'`  
+   階層化された  
+* rails console  
+   コンソールの起動  
+* rails db  
+   DBへのアクセス  
+* rails server  
+   サーバへアクセスする
+   rails s -e production
+   本番環境で構築
+
+## migration
+
+```
+def change
+   # 今回の変更で実行する内容
+end
+
+def self.up
+   # ロールバックできない処理をする際に使用する
+end
+
+def self.down
+   # 
+end
+```
+
+
+create_table
+
+drop_table
+
+
 ## log
 
 ## Controller
@@ -73,9 +125,7 @@ subject がモデルである
 簡単にAPIが作成できる
 
 ```ruby
-
 mount API_wewe
-
 ```
 
 ログ
@@ -93,4 +143,17 @@ http://stackoverflow.com/questions/15206789/rails-not-serving-assets-in-producti
 `unicorn_rails -c config/unicorn.rb -E production -D`
 `ps -ef | grep unicorn | grep -v grep`
 
+### Capistrano
 
+```
+# productionのデプロイ
+cap production deploy
+# 一つ前のバージョンに戻す
+cap deploy:rollback
+# migrate
+cap deploy:migrate
+# updatecode & migrate
+cap deploy:migrations
+# 古いやつを削除　default 5つ
+cap deploy:cleanup
+```
