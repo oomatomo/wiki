@@ -115,5 +115,22 @@ sudo rm -rf /etc/localtime
 sudo cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ```
 
+### Memcached
+
+#### バージョンチェック
+
+ヘルプの一行目に表示される
+
+```
+$ memcached -h
+memcached 1.4.5
+```
+
+netcatで調べる。
+
+```
+$ echo version | nc localhost 11211
+VERSION 1.4.13
+```
 
 
