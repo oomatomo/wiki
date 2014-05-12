@@ -104,6 +104,16 @@ $ scp -r tomo@test.com:/home/tomo /test
 ALL=(ALL) NOPASSWD:ALL
 ```
 
+### 日付変更
+
+`/usr/share/zoneinfo` にそれぞれのタイムゾーンのファイルがある。
+
+/etc/localtimeとしてコピーすれば完了
+
+```Bash
+sudo rm -rf /etc/localtime
+sudo cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+```
 
 
 
