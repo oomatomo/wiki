@@ -49,13 +49,39 @@ create_table
 
 drop_table
 
-
 ## log
 
 ## Controller
 
-ログの書き方
+### ログの書き方
 logger.debug
+
+### エラーページ
+
+`Rails.application.config.consider_all_requests_local`は、開発環境でのアクセスという設定である。
+[purpose-of-consider-all-requests-local-in-config-environments-development-rb](http://stackoverflow.com/questions/373089/purpose-of-consider-all-requests-local-in-config-environments-development-rb)
+
+`config/environments/development.rb`で設定されている。
+
+config/routes.rb
+
+```
+ ...
+ unless Rails.application.config.consider_all_requests_local
+   match '*not_found', to: 'application#render_404' 
+ end
+end
+```
+
+app/controllers/application_controller.rb
+
+```
+unless Rails.application.config.consider_all_requests_local 
+   rescue_from Exception,                           with: :render_500
+   rescue_from ActionController::RoutingError,      with: :render_404
+end
+
+```
 
 
 ## Guard
