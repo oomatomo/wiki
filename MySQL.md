@@ -27,3 +27,9 @@ $ yum localinstall ...
 ```
 > GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY 'root のパスワード' WITH GRANT OPTION;
 ```
+
+## 設定ファイルの場所の確認
+
+```
+mysql --help | grep my.cnf
+```
