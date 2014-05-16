@@ -6,6 +6,8 @@
 curl -L http://xrl.us/perlbrewinstall | bash
 ```
 
+~/.bashrcに記入する
+
 ```Bash:.bashrc
 source ~/perl5/perlbrew/etc/bashrc
 ```
