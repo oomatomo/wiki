@@ -19,6 +19,20 @@ Validateが豊富
 invalid
 novalid
 
+## ng-class
+
+簡単にToggleみたいなのが可能
+
+```
+<div div ng-class='fixContainer ? container : container-fluid' ></div>
+```
+
+```
+$scope.fixContainer = 0;
+```
+
+上の場合は クラスは container-fluidが適応されるよ
+
 
 ## 豆知識
 
