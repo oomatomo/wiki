@@ -23,8 +23,10 @@ novalid
 
 簡単にToggleみたいなのが可能
 
+http://stackoverflow.com/questions/15397252/angularjs-toggle-class-using-ng-class
+
 ```
-<div div ng-class='fixContainer ? container : container-fluid' ></div>
+<div div ng-class="fixContainer ? 'container' : 'container-fluid'" ></div>
 ```
 
 ```
