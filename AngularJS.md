@@ -35,6 +35,10 @@ $scope.fixContainer = 0;
 
 上の場合は クラスは container-fluidが適応されるよ
 
+## textでのchangeイベント
+
+http://stackoverflow.com/questions/11868393/angularjs-inputtext-ngchange-fires-while-the-value-is-changing
+
 
 ## 豆知識
 

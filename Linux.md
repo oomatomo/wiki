@@ -133,4 +133,10 @@ $ echo version | nc localhost 11211
 VERSION 1.4.13
 ```
 
+### iostat
+
+```
+yum install sysstat
+```
+
 
