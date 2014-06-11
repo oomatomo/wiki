@@ -139,4 +139,28 @@ VERSION 1.4.13
 yum install sysstat
 ```
 
+### syslog-ng
 
+```
+yum install syslog-ng libdbi libdbi-drivers libdbi-dbd-mysql syslog-ng-libdbi
+```
+
+loggerで擬似的にログを送信できる　テストの時に便利
+
+### crontab
+
+#### ログ
+
+crontab実行状況`/var/log/cron`に存在する
+
+#### メール
+
+yumでインストール mailx sendmail 
+sendmailをstartさせる
+
+```
+yum install mailx sendmail
+service sendmail start
+```
+crontab -eでMAILTO=メールアドレスで
+設定されたメールアドレスに送信される
