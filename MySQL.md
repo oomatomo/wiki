@@ -19,7 +19,6 @@ $ yum localinstall ...
 /usr/bin/mysqld_safe --user=root --skip-grant-tables & mysql mysql
 # mysql 5.6ではパスワードは必須
 > update user set Password=PASSWORD('ooma') where Host='localhost' and User='root';
-
 ```
 
 ## 外部アクセス
@@ -32,4 +31,11 @@ $ yum localinstall ...
 
 ```
 mysql --help | grep my.cnf
+```
+
+# Lock
+
+```
+SELECT GET_LOCK('test',3);
+SELECT RELEASE_LOCK('test');
 ```

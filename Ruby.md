@@ -76,3 +76,39 @@ C:\Dev-Kit>ruby dk.rb install
 includeできるのはモジュールのみである
 
 
+## gem の作り方
+
+```
+bundle gem [作成したいgemの名前]
+```
+
+### gem でのテスト
+
+作成したgemのファイルの中にgemspecファイルがある
+gemspecファイルに以下の設定を追加する
+
+```
+spec.add_development_dependency 'rspec'
+```
+
+specフォルダを作成し、`spec/spec_helper.rb`に以下の内容で作成する
+
+```
+require 'bundler/setup'
+Bundler.setup
+
+require 'gem_name'
+
+RSpec.configure do |config|
+  # some (optional) config here
+end
+```
+
+
+
+
+
+
+
+
+
