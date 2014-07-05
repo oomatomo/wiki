@@ -183,3 +183,36 @@ cap deploy:migrations
 # 古いやつを削除　default 5つ
 cap deploy:cleanup
 ```
+
+### Jenkins
+
+
+Gemは `ci_reporter`を利用する
+
+https://github.com/ci-reporter/ci_reporter
+
+```
+group :test do
+  gem 'ci_reporter'
+end
+
+```
+
+lib/lib/tasks/ci_reporter.rake　を作成する
+
+```
+if ENV['GENERATE_REPORTS'] == 'true'
+    require 'ci/reporter/rake/rspec'
+    task :spec => 'ci:setup:rspec'
+end
+```
+
+Rakefileに設定する
+
+```
+require 'ci/reporter/rake/rspec'
+```
+
+Jenkins側で bundle exec rake ci:setup:rspec spec を実行する
+
+

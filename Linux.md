@@ -78,6 +78,16 @@ $ chmod 700 ~/.ssh
 $ chmod 600 ~/.ssh/authorized_keys
 ```
 
+sshからコマンド実行
+
+ホスト名の後に実行したいコマンドを指定する
+
+```Bash
+$ ssh host ls -l
+$ ssh host ls -l | grep test   ← ローカル側でgrep 実行
+$ ssh host 'ls -l | grep test' ← リモート側でgrep 実行
+```
+
 ### scp
 
 -r ディレクトリの再帰的コピー
