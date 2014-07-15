@@ -1,5 +1,19 @@
 # linux
 
+### OSバージョン確認
+
+```
+$ cat /etc/redhat-release 
+CentOS release 5.8 (Final)
+```
+
+### カーネルバージョン確認
+
+```
+$ cat /proc/version
+Linux version 2.6.32-431.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Fri Nov 22 03:15:09 UTC 2013
+```
+
 ### yum 
 
 ```Bash
