@@ -30,6 +30,18 @@ Rails
 
 ## migration
 
+rails generate migration クラス名 カラム名:データ型( カラム名:データ型)
+```
+# model のデータを作成する時
+rails generate model group name:string describe:string 
+
+# リレーション（外部キー設定）
+rails generate model user_group user_id:integer:index group_id:integer:index
+
+# ユニークキー設定
+rails generate migration add_index_to_table_name column_name:uniq
+```
+
 ```
 def change
    # 今回の変更で実行する内容
@@ -44,10 +56,36 @@ def self.down
 end
 ```
 
+### create_table
 
-create_table
+### drop_table
 
-drop_table
+### rake command
+
+* db:migrate runs (single) migrations that have not run yet.
+* db:create creates the database
+* db:drop deletes the database
+* db:schema:load creates tables and columns within the (existing) database following schema.rb
+* db:setup does db:create, db:schema:load, db:seed
+* db:reset does db:drop, db:setup
+
+* db:create creates the database for the current env
+* db:create:all creates the databases for all envs
+* db:drop drops the database for the current env
+* db:drop:all drops the databases for all envs
+* db:migrate runs migrations for the current env that have not run yet
+* db:migrate:up runs one specific migration
+* db:migrate:down rolls back one specific migration
+* db:migrate:status shows current migration status
+* db:rollback rolls back the last migration
+* db:forward advances the current schema version to the next one
+* db:seed (only) runs the db/seed.rb file
+* db:schema:load loads the schema into the current env's database
+* db:schema:dump dumps the current env's schema (and seems to create the db as well)
+* db:setup runs db:schema:load, db:seed
+* db:reset runs db:drop db:setup
+* db:migrate:redo runs (db:migrate:down db:migrate:up) or (db:rollback db:migrate:migrate) depending on the specified migration
+* db:migrate:reset runs db:drop db:create db:migrate
 
 ## log
 
