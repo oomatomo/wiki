@@ -6,10 +6,23 @@
 
 ## 準備
 
+### DockerがインストールされているVagrantfileを実行
+
 ```
 git clone https://github.com/dotcloud/docker.git
 cd docker
 vagrant up
+```
+### Centos Docker install
+
+```
+# CentOS 7
+yum install docker 
+# CentOS 6
+yum install docker-io
+
+service docker start
+chkconfig docker on
 ```
 
 ## Puttyからの接続
@@ -48,7 +61,7 @@ amattn/postgresql-9.3.0        precise base, PostgreSQL 9.3.0 installed w...   0
 $ docker pull learn/tutorial
 Pulling repository learn/tutorial
 8dbd9e392a96: Download complete
-```  
+```
 
 ## Docker上でechoコマンドを実行する
 
@@ -91,6 +104,8 @@ $ docker inspect 3f32f9b50c7c
 ## DockerFileの作成
 
 ## ビルドする
+
+カレントディレクトリにDockerfileが存在する
 
 ```
 $ sudo docker build -t oomatomo/base .
