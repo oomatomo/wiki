@@ -20,6 +20,18 @@ Linux version 2.6.32-431.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc ve
 $ rpm -Uhv http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 $ rpm -Uhv http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 ```
+### spec
+
+```
+# OS
+$ cat /etc/redhat-release
+# カーネル
+$ cat /proc/version
+# CPU
+$ cat /proc/cpuinfo
+# メモリ
+$ cat /proc/meminfo
+```
 
 ### user
 
@@ -101,6 +113,9 @@ $ ssh host ls -l
 $ ssh host ls -l | grep test   ← ローカル側でgrep 実行
 $ ssh host 'ls -l | grep test' ← リモート側でgrep 実行
 ```
+
+sshのログの場所
+cat /var/log/secure
 
 ### scp
 
@@ -188,3 +203,10 @@ service sendmail start
 ```
 crontab -eでMAILTO=メールアドレスで
 設定されたメールアドレスに送信される
+
+### sort
+
+IP系のsort
+```
+sort -n -t '.' -k 1,1 -k 2,2 -k 3,3 -k 4,4 | uniq 
+```
