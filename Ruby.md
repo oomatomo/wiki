@@ -75,6 +75,14 @@ C:\Dev-Kit>ruby dk.rb install
 継承できるのはクラス。
 includeできるのはモジュールのみである
 
+## gem 使い方
+
+```
+gem install 
+gem uninstall
+```
+
+-vでバージョン指定
 
 ## gem の作り方
 

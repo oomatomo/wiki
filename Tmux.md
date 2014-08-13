@@ -141,6 +141,14 @@ Spaceキーでコピーの始点を設定し、Enterでコピーの終点を決�
 貼付けは`C-b ]`で出来る  
 
 --
+### コマンド
+
+`C-b :コマンド`　でtmuxのコマンドを実行することが出来ます 
+
+C-b :set-window-option synchronize-panes on
+現在開いているウウィンドウ内のパネルが全て同期します
+
+--
 ### 参考
 
 http://d.hatena.ne.jp/eco31/20101126/1290725841
