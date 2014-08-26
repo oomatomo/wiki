@@ -42,7 +42,7 @@ user add
 -s シェルの指定   
 
 ```Bash
-$ useradd -u 1004 -m -s /bin/bash tomo
+$ useradd -m -s /bin/bash tomo
 ```
 
 usermod
@@ -78,6 +78,16 @@ $ w
 USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
 vagrant  pts/0    192.168.137.1    Thu09    0.00s  0.26s  0.00s tmux -2
 ```
+
+### IPv6
+
+1. /etc/sysconfig/network  
+ NETWORKING_IPV6=no
+
+1. vi /etc/modprobe.d/disable-ipv6.conf  
+ options ipv6 disable=1
+
+1. chkconfig ip6tables off
 
 ### netstat
 
