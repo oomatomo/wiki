@@ -13,7 +13,7 @@ CentOS release 5.8 (Final)
 $ cat /proc/version
 Linux version 2.6.32-431.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Fri Nov 22 03:15:09 UTC 2013
 ```
-
+  
 ### yum 
 
 ```Bash
@@ -42,7 +42,7 @@ user add
 -s シェルの指定   
 
 ```Bash
-$ useradd -u 1004 -m -s /bin/bash tomo
+$ useradd -m -s /bin/bash tomo
 ```
 
 usermod
@@ -76,6 +76,7 @@ $ w
 USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
 vagrant  pts/0    192.168.137.1    Thu09    0.00s  0.26s  0.00s tmux -2
 ```
+
 
 ユーザ情報の確認
 
@@ -282,6 +283,17 @@ This filesystem will be automatically checked every 28 mounts or
 ```
 # mount /dev/vg_sdb/lv_sdb_01 /home
 ```
+
+### IPv6
+
+1. /etc/sysconfig/network  
+ NETWORKING_IPV6=no
+
+1. vi /etc/modprobe.d/disable-ipv6.conf  
+ options ipv6 disable=1
+
+1. chkconfig ip6tables off
+
 
 ### netstat
 
