@@ -24,6 +24,49 @@ yum install docker-io
 service docker start
 chkconfig docker on
 ```
+### Windows Docker install
+
+boot2dockerをインストールします
+https://docs.docker.com/installation/windows/
+
+ssh-keygen　がないエラーの場合 msysgitをインストールする
+http://msysgit.github.io/
+PATHを追加する C:\Program Files (x86)\Git\bin
+
+```
+boot2docker init
+boot2docker up
+```
+
+#### puttyでsshする
+
+boot2dockerで利用しているIPをチェックする
+
+```
+> boot2docker ip
+The VM's Host only interface IP address is: 192.168.59.103
+```
+
+puttyの設定
+
+接続先を docker@192.168.59.103
+鍵は $HOME/.ssh/id_boot2docker　を puttyのkeygenでppkに変換したものを使う
+
+#### 設定のカスタマイズ
+
+boot2docker config > $HOME/.boot2docker/profile
+
+設定ファイルが出力される
+
+```
+> boot2docker -h
+config error: Near line 1, key '��V
+```
+
+上のエラーの時は、文字コードの問題
+デフォルト文字コードがUnicodeなのでUTF-8に変換する
+
+boot2docker -h でヘルプ画面が表示されたら、問題なし
 
 ## Puttyからの接続
 
@@ -117,9 +160,16 @@ $ sudo docker build -t oomatomo/base .
 $ docker run -d -t -i oomatomo/base　/bin/zsh
 ```
 
+-d バックグランドで実行
+
 ## Dockerにアクセスする
 
 ```
 $ sudo docker attach 'CONTAINER ID'
 ```
 
+## kill
+
+```
+$ docker kill 'CONTAINER ID'
+```
