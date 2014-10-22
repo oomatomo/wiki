@@ -351,6 +351,13 @@ $ scp -r tomo@test.com:/home/tomo /test
  sudo tcpdump -i eth1  -s 0 -l -A dst port 3306
 ```
 
+### iptables
+
+```Bash
+iptables -A OUTPUT -d <IPアドレス> -p all -j REJECT
+service iptables save
+```
+
 ### sudo
 
 ```Bash
