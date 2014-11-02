@@ -8,6 +8,11 @@ export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ```
 
+## PATH系
+
+GOROOT : goインストールルートフォルダ
+GOPATH : ワーキングディレクトリ
+
 ## コマンド
 
 ```
