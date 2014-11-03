@@ -10,6 +10,8 @@ Rails
    DBをmysqlにbundle installをスキップしてくれる
 * rails generate scaffold page name:string title:string  
    controllerとmodelを作成してくれる  
+* rails g scaffold_controller モデル名
+  既存のモデルのでcontrollerとviewを作成してくれる
 * rails generate model page name:string title:string  
    modelの作成  
    db/migrate/日付_create_page.rbができる  
