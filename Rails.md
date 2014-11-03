@@ -10,7 +10,7 @@ Rails
    DBをmysqlにbundle installをスキップしてくれる
 * rails generate scaffold page name:string title:string  
    controllerとmodelを作成してくれる  
-* rails g scaffold_controller モデル名
+* rails g scaffold_controller モデル名  
   既存のモデルのでcontrollerとviewを作成してくれる
 * rails generate model page name:string title:string  
    modelの作成  
@@ -50,11 +50,13 @@ def change
 end
 
 def self.up
-   # ロールバックできない処理をする際に使用する
+   # 変更時に実行される処理
+   change_column :items, :detail_url, :text
 end
 
 def self.down
-   # 
+   # ロールバックの際に実行される処理
+   change_column :items, :detail_url, :string
 end
 ```
 
