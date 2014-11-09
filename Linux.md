@@ -444,3 +444,10 @@ service nmb start
 smbpasswd -a vagrant
 ```
 
+## unzip
+
+-d で展開先のフォルダが指定出来る
+
+```
+unzip hoge.zip -d fuga
+```
