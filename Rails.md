@@ -257,4 +257,16 @@ require 'ci/reporter/rake/rspec'
 
 Jenkins側で bundle exec rake ci:setup:rspec spec を実行する
 
+# Slim
+
+https://github.com/slim-template/slim/blob/master/README.jp.md
+
+erb から slimに変換
+
+```
+gem install html2slim
+for i in app/views/**/*.erb; do erb2slim $i ${i%erb}slim && rm $i; done
+```
+
+
 
