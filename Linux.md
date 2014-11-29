@@ -408,6 +408,14 @@ yum install syslog-ng libdbi libdbi-drivers libdbi-dbd-mysql syslog-ng-libdbi
 
 loggerで擬似的にログを送信できる　テストの時に便利
 
+### logrotate
+
+logrotateの実行
+
+```
+logrotate -f /etc/logrotate.d/httpd
+```
+
 ### crontab
 
 #### ログ
