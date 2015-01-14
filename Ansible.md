@@ -22,14 +22,29 @@ ansible_hostsは以下の通りにする
 
 ## ansible-palybook
 
-文法チェック
-$ ansible-playbook simple-playbook.yml --syntax-check
-task一覧
-$ ansible-playbook simple-playbook.yml --list-tasks
-dry-run　変更されるかどうか確認できる
-$ ansible-playbook simple-playbook.yml --check
-Done
-$ ansible-playbook simple-playbook.yml
-hostファイル指定
-$ ansible-playbook -i hosts simple-playbook.yml 
+文法チェック  
+$ ansible-playbook simple-playbook.yml --syntax-check  
+task一覧  
+$ ansible-playbook simple-playbook.yml --list-tasks  
+dry-run　変更されるかどうか確認できる  
+$ ansible-playbook simple-playbook.yml --check  
+Done  
+$ ansible-playbook simple-playbook.yml  
+hostファイル指定  
+$ ansible-playbook -i hosts simple-playbook.yml   
 
+## sudo 権限
+
+LANG=C ansible-playbook -i hosts centos.yml --ask-su-pass --check
+
+-ask-su-pass オプションでsu のパスワードを聞かれる
+LAN=Cを設定しないと固まるので注意
+
+ yaml側の設定
+su: True
+su_user: root
+remote_user: omagari.tomohisa
+
+su: su コマンドを実行する
+su_user: suコマンド切り替わるユーザ
+remote_user: サーバに接続するときのユーザ名
