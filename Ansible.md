@@ -37,14 +37,14 @@ $ ansible-playbook -i hosts simple-playbook.yml
 
 LANG=C ansible-playbook -i hosts centos.yml --ask-su-pass --check
 
--ask-su-pass オプションでsu のパスワードを聞かれる
-LAN=Cを設定しないと固まるので注意
+-ask-su-pass オプションでsu のパスワードを聞かれる  
+LAN=Cを設定しないと固まるので注意  
 
- yaml側の設定
-su: True
-su_user: root
-remote_user: omagari.tomohisa
+ yaml側の設定  
+su: True  
+su_user: root  
+remote_user: omagari.tomohisa  
 
-su: su コマンドを実行する
-su_user: suコマンド切り替わるユーザ
-remote_user: サーバに接続するときのユーザ名
+su: su コマンドを実行する  
+su_user: suコマンド切り替わるユーザ  
+remote_user: サーバに接続するときのユーザ名  
