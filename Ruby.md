@@ -112,6 +112,12 @@ RSpec.configure do |config|
 end
 ```
 
+# nokogiri 
+インストール
+
+ENV['NOKOGIRI_USE_SYSTEM_LIBRARIES'] = 'YES'
+
+
 
 
 
