@@ -173,3 +173,10 @@ $ sudo docker attach 'CONTAINER ID'
 ```
 $ docker kill 'CONTAINER ID'
 ```
+
+
+```
+docker build -t base .
+docker run -d --name b1 base
+docker inspect --format ' {{ .NetworkSettings.IPAddress }} ' b1
+```
