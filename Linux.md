@@ -459,3 +459,11 @@ smbpasswd -a vagrant
 ```
 unzip hoge.zip -d fuga
 ```
+
+## sed
+
+先頭と末尾に”を追加する
+
+```
+sed 's/^\(.\+\)$/\"\1\"/g'
+```
