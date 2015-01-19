@@ -363,6 +363,7 @@ service iptables save
 ```Bash
 # Passwordなし
 ALL=(ALL) NOPASSWD:ALL
+%wheel ALL=NOPASSWD: ALL
 ```
 
 ### 日付変更
