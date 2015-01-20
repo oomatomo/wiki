@@ -39,3 +39,10 @@ mysql --help | grep my.cnf
 SELECT GET_LOCK('test',3);
 SELECT RELEASE_LOCK('test');
 ```
+
+# Percona
+
+## pt-query-digest
+
+ユーザ指定　クエリの実行時間の最大順
+pt-query-digest --filter '($event->{user} || "") =~ m/tachyon-m/' --order-by=Query_time:max
