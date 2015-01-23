@@ -46,3 +46,16 @@ SELECT RELEASE_LOCK('test');
 
 ユーザ指定　クエリの実行時間の最大順
 pt-query-digest --filter '($event->{user} || "") =~ m/tachyon-m/' --order-by=Query_time:max
+
+
+# Lock
+
+有効にする
+
+CREATE TABLE innodb_monitor (a INT) ENGINE=INNODB;
+CREATE TABLE innodb_lock_monitor (a INT) ENGINE=INNODB;
+
+無効にする
+
+drop table innodb_monitor;
+drop table innodb_lock_monitor;
