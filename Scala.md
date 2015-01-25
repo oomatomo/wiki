@@ -80,4 +80,26 @@ dependencies
 include で共通の設定ファイルを読み込むことができる
 
 
+# giter8
+
+## install 
+
+```
+brew install giter8
+```
+
+テンプレートの一覧
+https://github.com/n8han/giter8/wiki/giter8-templates
+
+Scalaのプロジェクトのテンプレートを作成する
+
+```
+g8 pmandera/basic-scala-project
+```
+
+pmandera/basic-scala-project　はテストのフレームワークにspecs2を使ってる
+
+
+
+
 
