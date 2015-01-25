@@ -20,3 +20,49 @@ Play 2.3 replaces the play command with activator:
 You can read more about this change at:
   http://www.playframework.com/documentation/2.3.x/Migration23
   http://www.playframework.com/documentation/2.3.x/Highlights23
+  
+## activator
+
+### Error
+
+#### newのときにタイムアウトになる
+
+https://github.com/typesafehub/activator/issues/728
+
+```
+ava.util.concurrent.TimeoutException: Futures timed out after [5 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.ready(Promise.scala:219)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:223)
+	at scala.concurrent.Await$$anonfun$result$1.apply(package.scala:111)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:53)
+	at scala.concurrent.Await$.result(package.scala:111)
+	at activator.ActivatorCli$.activator$ActivatorCli$$generateProjectTemplate(ActivatorCli.scala:147)
+	at activator.ActivatorCli$$anonfun$apply$1$$anonfun$13$$anonfun$apply$3.apply(ActivatorCli.scala:105)
+	at activator.ActivatorCli$$anonfun$apply$1$$anonfun$13$$anonfun$apply$3.apply(ActivatorCli.scala:104)
+	at scala.Option.map(Option.scala:145)
+	at activator.ActivatorCli$$anonfun$apply$1$$anonfun$13.apply(ActivatorCli.scala:104)
+	at activator.ActivatorCli$$anonfun$apply$1$$anonfun$13.apply(ActivatorCli.scala:103)
+	at scala.Option.flatMap(Option.scala:170)
+	at activator.ActivatorCli$$anonfun$apply$1.apply$mcI$sp(ActivatorCli.scala:103)
+	at activator.ActivatorCli$$anonfun$apply$1.apply(ActivatorCli.scala:19)
+	at activator.ActivatorCli$$anonfun$apply$1.apply(ActivatorCli.scala:19)
+	at activator.ActivatorCli$.withContextClassloader(ActivatorCli.scala:179)
+	at activator.ActivatorCli$.apply(ActivatorCli.scala:19)
+	at activator.ActivatorLauncher.run(ActivatorLauncher.scala:35)
+	at xsbt.boot.Launch$$anonfun$run$1.apply(Launch.scala:109)
+	at xsbt.boot.Launch$.withContextLoader(Launch.scala:129)
+	at xsbt.boot.Launch$.run(Launch.scala:109)
+	at xsbt.boot.Launch$$anonfun$apply$1.apply(Launch.scala:36)
+	at xsbt.boot.Launch$.launch(Launch.scala:117)
+	at xsbt.boot.Launch$.apply(Launch.scala:19)
+	at xsbt.boot.Boot$.runImpl(Boot.scala:44)
+	at xsbt.boot.Boot$.main(Boot.scala:20)
+	at xsbt.boot.Boot.main(Boot.scala)
+```
+
+activator -Dactivator.timeout=30s new web
+
+-Dでタイムアウトを長くする
+
+
+
