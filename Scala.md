@@ -65,4 +65,19 @@ activator -Dactivator.timeout=30s new web
 -Dでタイムアウトを長くする
 
 
+### コンソール
+
+activator　でコンソールコマンドに移動できる
+
+dependencies
+　buid.sbtの設定を元に依存関係のライブラリをインストールする
+~compile
+　ファイルが変更するたびにコンパイルする
+　
+
+### 環境ごとの設定ファイル
+
+include で共通の設定ファイルを読み込むことができる
+
+
 
