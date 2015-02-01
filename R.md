@@ -20,7 +20,7 @@ test$datetime <- as.POSIXct(strptime(test$datetime, "%H:%M:%S"))
 ```
 x <- as.POSIXct(strptime("14:01:00","%H:%M:%S"))
 y <- as.POSIXct(strptime("14:02:00","%H:%M:%S"))
-
+z <- as.POSIXct(strptime("2015-1-30 15:00:00","%Y-%m-%d %H:%M:%S"))
 # testのdatetimeのカラムの14:01:00～14:02:00のデータを取得してくれる
 test <- subset(test, datetime >= x & z >= datetime )
 ```
@@ -75,3 +75,30 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   }
 }
 ```
+
+## グループ化
+
+### group_by
+
+mean = 平均
+
+summarise_each ですべてのカラムに適応させる
+
+summarise(mean=mean(カラム))でカラムだけの平均が出せる
+
+```{r}
+library(dplyr)
+ datas %>%
++ group_by(カラム１, カラム2) %>%
++ summarise_each(funs(mean(., na.rm = TRUE)))
+```
+
+### aggregate
+
+mean = 平均
+```
+aggregate(. ~ カラム名, data=data, FUN=mean, na.rm=TRUE)  
+```
+
+
+
