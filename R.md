@@ -97,7 +97,8 @@ library(dplyr)
 
 mean = 平均
 ```
-aggregate(. ~ カラム名, data=data, FUN=mean, na.rm=TRUE)  
+aggregate(. ~ カラム名, data=data, FUN=mean, na.rm=TRUE) 
+aggregate(. ~ カラム1+カラム2, data=web_result, mean, na.rm=TRUE)
 ```
 
 
