@@ -101,5 +101,11 @@ aggregate(. ~ カラム名, data=data, FUN=mean, na.rm=TRUE)
 aggregate(. ~ カラム1+カラム2, data=web_result, mean, na.rm=TRUE)
 ```
 
+## Rstdio
+
+### 文字化け
+
+Tools -> General -> Default text encoding
+デフォルト [Ask] -> [UTF-8]
 
 
