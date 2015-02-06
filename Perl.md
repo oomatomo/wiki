@@ -44,8 +44,19 @@ cpanfileにインストールするモジュールを書く
 #perl version
 requires 'perl', '5.16.3';
 
-````
+```
 
+## Nytprof
+
+NYTPROF=file=/tmp/nytprof.out:out:addpid=1:endatexit=1:stmts=0
+endatexit=1
+
+exitが完了するようにする
+
+```
+nytprofmerge nytprof.out.*
+nytprofhtml -m --file=nytprof-merged.out
+```
 
 ## 豆知識
 ### Array to Hash
