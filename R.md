@@ -101,6 +101,31 @@ aggregate(. ~ カラム名, data=data, FUN=mean, na.rm=TRUE)
 aggregate(. ~ カラム1+カラム2, data=web_result, mean, na.rm=TRUE)
 ```
 
+### unique
+
+ユニークな値がほしいとき
+
+```
+ddd <- c("11","12","11")
+data <- data.frame(ddd)
+unique(data)
+```
+
+### plyr
+
+#### count
+
+count(データ,c(列))
+
+列ごとのカウントを出してくれる
+
+```
+ddd <- c("11","12","11")
+eee <- c("300","200","100")
+data <- data.frame(ddd,eee)
+count(data, c('ddd'))
+```
+
 ## Rstdio
 
 ### 文字化け
