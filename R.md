@@ -76,6 +76,19 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 }
 ```
 
+### ggplotのオブジェクトのリスト化
+
+```
+graph_list <- list()
+for(type in unique(data$V3) ) {
+  p <- ggplot(data=subset(data, V3 == type), aes( x = V1) ) + 
+  geom_point(aes(y=V2, label=V3), colour="#0072B2", size=0.1) +
+  graph_list[[length(graph_list) + 1]] <- p
+}
+
+multiplot(plotlist=graph_list, cols=2)
+```
+
 ## グループ化
 
 ### group_by
