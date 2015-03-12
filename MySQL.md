@@ -45,8 +45,10 @@ SELECT RELEASE_LOCK('test');
 ## pt-query-digest
 
 ユーザ指定　クエリの実行時間の最大順
-pt-query-digest --filter '($event->{user} || "") =~ m/tachyon-m/' --order-by=Query_time:max
 
+```
+pt-query-digest --filter '($event->{user} || "") =~ m/hoge/' --order-by=Query_time:max
+```
 
 # Lock
 
