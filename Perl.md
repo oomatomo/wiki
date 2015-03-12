@@ -48,12 +48,21 @@ requires 'perl', '5.16.3';
 
 ## Nytprof
 
-NYTPROF=file=/tmp/nytprof.out:out:addpid=1:endatexit=1:stmts=0
-NYTPROF=sigexit=int
+```
+export NYTPROF=file=/tmp/nytprof.out:out:addpid=1:endatexit=1:stmts=0
+export NYTPROF=sigexit=int
+```
 
 ```
 nytprofmerge nytprof.out.*
 nytprofhtml -m --file=nytprof-merged.out
+```
+
+## mod_perl
+
+```Perl
+PerlSetEnv NYTPROF file=/tmp/nytprof/nytprof.out:addpid=1:endatexit=1:stmts=0
+PerlModule Devel::NYTProf::Apache
 ```
 
 ## 豆知識
