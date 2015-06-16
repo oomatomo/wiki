@@ -101,5 +101,28 @@ pmandera/basic-scala-project　はテストのフレームワークにspecs2を�
 
 
 
+# For yield
+
+```scala
+for {
+  a <- Option(1)
+  b <- Option(2)
+} yield ( a, b ) match {
+  case (a, b) =>
+    a + b
+}
+```
+
+```scala
+( for {
+  a <- Option(1)
+  b <- Option(2)
+} yield ( a, b ) ) match {
+  case Some(a, b) =>
+    a + b
+  case None =>
+    None
+}
+```
 
 
