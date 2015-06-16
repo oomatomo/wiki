@@ -125,4 +125,17 @@ for {
 }
 ```
 
+# List Index
+
+```scala
+val list = List("a", "b", "c")
+list.zipWithIndex.foreach( v => println(v._1, v._2) )
+
+list.zipWithIndex.map( v => v._2 -> v._1 ).toMap
+scala.collection.immutable.Map[Int,String] = Map(0 -> a, 1 -> b, 2 -> c)
+
+val array = Array("a", "b", "c")
+list.zipWithIndex.foreach( case(e:String, i:Int) => println(i, e) )
+```
+
 
