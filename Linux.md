@@ -312,6 +312,21 @@ $ openssl dgst -sha256 tmux-1.8.tar.gz
 SHA256(tmux-1.8.tar.gz)=f265401ca890f8223e09149fcea5abcd6dfe75d597ab106e172b01e9d0c9cd44
 ```
 
+### ssh-keygen
+
+```
+ssh-keygen -t rsa -C "ooma0301@gmail.com"
+ssh-keygen -t rsa -f ファイル名
+```
+
+鍵の種類
+-t rsa1
+-t rsa
+-t dsa
+
+-C コメント
+-f ファイル名
+
 ### ssh
 
 ```Bash
