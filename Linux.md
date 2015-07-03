@@ -483,3 +483,16 @@ unzip hoge.zip -d fuga
 ```
 sed 's/^\(.\+\)$/\"\1\"/g'
 ```
+
+## Postfix
+
+```
+# キューの確認
+mailq
+# メールキューを削除
+postsuper -d ALL
+```
+
+設定ファイルの位置
+config: /etc/postfix/main.cf
+config: /etc/postfix/master.cf
