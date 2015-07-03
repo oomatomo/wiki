@@ -9,6 +9,14 @@ install
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+# ライセンス認証
+
+Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.
+Xcodeのライセンス認証
+
+```
+sudo xcrun cc
+```
 
 # brew file
 
