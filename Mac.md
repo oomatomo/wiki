@@ -29,3 +29,12 @@ brew file edit
 brew file update
 brew file cask_upgrade
 ```
+
+# R言語
+
+```
+brew tap homebrew/science
+brew install gcc
+brew install Caskroom/cask/xquartz
+brew install r
+```
