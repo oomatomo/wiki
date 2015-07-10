@@ -89,14 +89,6 @@ $ docker version
 $ docker search tutorial
 NAME                           DESCRIPTION                                     STARS     OFFICIAL   TRUSTED
 learn/tutorial                                                                 0
-mzdaniel/buildbot-tutorial                                                     0
-jbarbier/tutorial1                                                             0
-odewahn/parallel_ml_tutorial                                                   0
-modolo/redis                   Tutorial redis                                  0
-mhubig/echo                    Simple echo loop from the tutorial.             0
-ivarvong/redis                 From the redis tutorial. Just redis-server...   0
-danlucraft/postgresql          Postgresql 9.3, on port 5432, un:docker, p...   0
-amattn/postgresql-9.3.0        precise base, PostgreSQL 9.3.0 installed w...   0
 ```
 
 ## Dockerのイメージをダウンロードする  
@@ -162,6 +154,8 @@ $ docker run -d -t -i oomatomo/base　/bin/zsh
 
 -d バックグランドで実行
 
+-p [ホストのポート]:[コンテナのポート]
+
 ## Dockerにアクセスする
 
 ```
@@ -179,4 +173,14 @@ $ docker kill 'CONTAINER ID'
 docker build -t base .
 docker run -d --name b1 base
 docker inspect --format ' {{ .NetworkSettings.IPAddress }} ' b1
+```
+
+# mac でのmysql 接続
+
+macでは boot2dockerへのポートのマッピングを行うため
+mysqlでの接続先のhostはboot2dockerのVMのIPになる
+
+```
+docker run -d -p 3308:3306 --name mysql mysql
+mysql -u tachyon-m -h $(boot2docker ip) -P 3308
 ```
