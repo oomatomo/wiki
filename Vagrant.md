@@ -5,10 +5,10 @@ rubyで書かれたVirtual Boxのフロントエンドツールみたいなも�
 コマンドでVMの作成、起動、破棄ができる。
 
 ## 事前準備
-Virtual Box
-https://www.virtualbox.org/wiki/Downloads
-Vagrant
-http://downloads.vagrantup.com/
+Virtual Box  
+https://www.virtualbox.org/wiki/Downloads  
+Vagrant  
+http://downloads.vagrantup.com/  
 
 ## 仮想環境の追加
 
@@ -184,4 +184,23 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+## Macで
 
+```
+Failed to mount folders in Linux guest. This is usually because
+the "vboxsf" file system is not available. Please verify that
+the guest additions are properly installed in the guest and
+can work properly. The command attempted was:
+
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` vagrant /vagrant
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` vagrant /vagrant
+
+The error output from the last command was:
+/sbin/mount.vboxsf: mounting failed with the error: No such device
+```
+
+```
+vagrant plugin install vagrant-vbguest
+```
+
+vagrant-vbguestというプラグインをインストールすればおk
