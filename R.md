@@ -106,6 +106,17 @@ library(dplyr)
 + summarise_each(funs(mean(., na.rm = TRUE)))
 ```
 
+### Join
+
+data frameのxとyをjoinする
+カラム a, b, cでjoinする
+
+```{r}
+library(dplyr)
+inner_join(x, y, by=c("a", "b", "c"))
+
+```
+
 ### aggregate
 
 mean = 平均
