@@ -27,14 +27,23 @@ test <- subset(test, datetime >= x & z >= datetime )
 
 ### ggplot2
 
-#### 折れ線グラフ
+### グラフの種類
 
-```
-ggplot(data=test,aes(x=test$date)) +
-    geom_line(aes(y = test$diff, color="diff")) +
-    geom_line(aes(y = test$count, color="count")) +
-    xlab("Time") + ylab("count") +  ggtitle("Test")
-```
+* geom_line():折れ線
+* geom_point():散布図
+
+### 目盛りの操作
+
+* xlab(""):X軸の目盛り
+* ylab(""):Y軸の目盛り
+* ggtitle(""):グラフのタイトル
+* xlim(c(0, 100)):X軸の表示範囲
+* ylim(c(0, 100)):Y軸の表示範囲
+
+### その他
+
+* interaction(column): グループ化の時に利用する 
+* theme_bw(base_family = "HiraKakuProN-W3"): 文字化け対策
 
 #### 複数グラフ表示
 
