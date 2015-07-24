@@ -15,7 +15,9 @@ test$datetimeが '13:10:10' だった場合有効,ただし日付は実行した
 test$datetime <- as.POSIXct(strptime(test$datetime, "%H:%M:%S"))
 ```
 
-### dataの絞り込み
+## data frame
+
+### data frameの絞り込み
 
 ```
 x <- as.POSIXct(strptime("14:01:00","%H:%M:%S"))
@@ -23,6 +25,19 @@ y <- as.POSIXct(strptime("14:02:00","%H:%M:%S"))
 z <- as.POSIXct(strptime("2015-1-30 15:00:00","%Y-%m-%d %H:%M:%S"))
 # testのdatetimeのカラムの14:01:00～14:02:00のデータを取得してくれる
 test <- subset(test, datetime >= x & z >= datetime )
+```
+
+### 差分の抽出
+
+差分のカラムを追加する
+前のRowとの差分になるため、行数が一つ減る
+
+```
+# 差分対象のカラム
+diff_col <- c("diff_col")
+diff_data <- data.frame(diff(as.matrix(head(data[, diff_col], -1))))
+# row 番号を振り分ける
+diff_data$row <- as.numeric(rownames(diff_data))
 ```
 
 ### ggplot2
