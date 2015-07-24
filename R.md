@@ -100,6 +100,15 @@ multiplot(plotlist=graph_list, cols=2)
 
 ## グループ化
 
+### distinct
+重複する行を削除する
+
+```{r}
+data %>%
+  distinct(重複したいカラム) %>%
+  select(取得するカラム)
+```
+
 ### group_by
 
 mean = 平均
