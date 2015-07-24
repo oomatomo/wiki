@@ -98,6 +98,19 @@ for(type in unique(data$V3) ) {
 multiplot(plotlist=graph_list, cols=2)
 ```
 
+### ggplotでの折れ線グラフにメモリごとにラベルを追加する
+
+```
+ggplot(data=subset(data, V3 == type) + 
+geom_line() +
+geom_text(aes(label= hoge, size=0.003, hjust=1, vjust=5)) 
+```
+
+labal：ラベルに表示するためのカラム  
+size ：ラベルのフォントサイズ  
+hjust：横の位置の数字  
+vjust：縦の位置の数字  
+
 ## グループ化
 
 ### distinct
