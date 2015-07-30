@@ -33,16 +33,16 @@ $ yum localinstall ...
 mysql --help | grep my.cnf
 ```
 
-# Lock
+## Lock
 
 ```
 SELECT GET_LOCK('test',3);
 SELECT RELEASE_LOCK('test');
 ```
 
-# Percona
+## Percona
 
-## pt-query-digest
+#### pt-query-digest
 
 ユーザ指定　クエリの実行時間の最大順
 
@@ -50,7 +50,7 @@ SELECT RELEASE_LOCK('test');
 pt-query-digest --filter '($event->{user} || "") =~ m/hoge/' --order-by=Query_time:max
 ```
 
-# Lock
+## Lock
 
 有効にする
 
@@ -64,4 +64,13 @@ CREATE TABLE innodb_lock_monitor (a INT) ENGINE=INNODB;
 ```
 drop table innodb_monitor;
 drop table innodb_lock_monitor;
+```
+
+## MysqlDump
+
+```
+# schemaのdump
+mysqldump -uroot -d [データベース名]
+# データのdump
+mysqldump -uroot -q --single-transaction [データベース名]
 ```
