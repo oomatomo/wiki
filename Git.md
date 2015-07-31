@@ -47,6 +47,8 @@ $ git config --global user.email oomatomo@gmail.com
 
 # remoteのURL変更
 $ git remote set-url origin URL
+# git プロトロコルをhttpsに変更する
+git config --global url."https://".insteadOf git://
 ```
 
 ## Log
