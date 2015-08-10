@@ -138,4 +138,31 @@ val array = Array("a", "b", "c")
 list.zipWithIndex.foreach( case(e:String, i:Int) => println(i, e) )
 ```
 
+# sbt native package
+
+マルチプロジェクトでひとつにまとめる
+
+target/universal/*.zipに出来る
+
+```scala
+import com.typesafe.sbt.SbtNativePackager.packageArchetype
+import NativePackagerHelper._
+// confを含む
+mappings in Universal ++= directory("conf")
+
+val releaseSetting = packageArchetype.java_server ++ Seq(
+    maintainer := "test",
+    packageDescription := "test Scala Application",
+    packageSummary := "test Application",
+    // entrypoint
+    // bin/..で実行するもの
+    mainClass in Compile := Some("test.cli.Main")
+)
+
+lazy val root = (project in file("."))
+    .aggregate(cli, lib)
+    .dependsOn(cli, lib)
+    .settings(releaseSetting: _*)
+```
+
 
