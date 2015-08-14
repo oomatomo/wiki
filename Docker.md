@@ -184,3 +184,12 @@ mysqlでの接続先のhostはboot2dockerのVMのIPになる
 docker run -d -p 3308:3306 --name mysql mysql
 mysql -u tachyon-m -h $(boot2docker ip) -P 3308
 ```
+
+# docker-machine
+
+```
+brew cask install docker-machine
+docker-machine create --driver virtualbox default
+docker-machine env default
+
+```
