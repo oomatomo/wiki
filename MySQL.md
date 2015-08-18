@@ -74,3 +74,15 @@ mysqldump -uroot -d [データベース名]
 # データのdump
 mysqldump -uroot -q --single-transaction [データベース名]
 ```
+
+## AUTO_INCREMENT初期化 
+
+```
+ALTER TABLE テーブル名 AUTO_INCREMENT = 1;
+```
+
+## csvをそのままINSERT
+
+```
+LOAD DATA INFILE "ファイル名" INTO TABLE テーブル名 FIELDS TERMINATED BY ',';
+```
