@@ -43,7 +43,7 @@ fatal: Unable to find remote helper for 'https'
 ```
 # Globalな設定
 $ git config --global user.name "oomaotmo"
-$ git config --global user.email oomatomo@gmail.com
+$ git config --global user.email ooma0301@gmail.com
 
 # remoteのURL変更
 $ git remote set-url origin URL
