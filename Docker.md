@@ -189,7 +189,8 @@ mysql -u tachyon-m -h $(boot2docker ip) -P 3308
 
 ```
 brew cask install docker-machine
-docker-machine create --driver virtualbox default
+# disk 20G, memory 2G
+docker-machine create -d virtualbox --virtualbox-disk-size "20000" --virtualbox-memory "2048" dev
 docker-machine env default
 
 ```
