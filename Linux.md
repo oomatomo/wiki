@@ -12,7 +12,18 @@ CentOS release 5.8 (Final)
 ```
 $ cat /proc/version
 Linux version 2.6.32-431.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Fri Nov 22 03:15:09 UTC 2013
+$ uname -r
+2.6.32-573.3.1.el6.x86_64
 ```
+
+update 
+
+```
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm
+yum --enablerepo=elrepo-kernel install kernel-lt
+```
+
   
 ### yum 
 
