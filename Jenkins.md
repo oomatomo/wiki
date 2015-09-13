@@ -30,7 +30,11 @@ etc/ini.t/jenkinsでJAVA_CMDの設定の変更を行う
 JAVA_CMD="$JENKINS_JAVA_CMD $JENKINS_JAVA_OPTIONS -DJENKINS_HOME=$JENKINS_HOME -Dhttp.proxyHost=hoge.net -Dhttp.proxyPort=8080 -jar $JENKINS_WAR"
 ```
 
-#
+# ssh の設定
+
+```
+sudo -u jenkins -H ssh-keygen -t rsa
+```
 
 # Plugin
 
