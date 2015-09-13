@@ -13,6 +13,7 @@ git clone https://github.com/dotcloud/docker.git
 cd docker
 vagrant up
 ```
+
 ### Centos Docker install
 
 ```
@@ -24,6 +25,15 @@ yum install docker-io
 service docker start
 chkconfig docker on
 ```
+### プロキシ設定
+
+/etc/sysconfig/docker
+
+```
+export HTTP_PROXY="http://<proxy_host>:<proxy_port>"
+export HTTPS_PROXY="http://<proxy_host>:<proxy_port>"
+```
+
 ### Windows Docker install
 
 boot2dockerをインストールします
