@@ -138,6 +138,17 @@ val array = Array("a", "b", "c")
 list.zipWithIndex.foreach( case(e:String, i:Int) => println(i, e) )
 ```
 
+# 正規表現取り出し
+
+```scala
+val r = """^\d+_(\d+)$""".r
+# 11が取り出せる
+"1_11" match {
+	case r(id) => id
+	case _ => 0
+}
+```
+
 # sbt native package
 
 マルチプロジェクトでひとつにまとめる
