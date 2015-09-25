@@ -35,7 +35,10 @@ brew install go --cross-compile-all
 https://golang.org/doc/install/source#environment  
 各環境の情報
 
-x86_64はamd64
+x86_64はamd64  
+GOOSはOS  
+GOARCHはCPU アーキテクチャ  
+`uname -m` で確認できる
 
 ```
 GOOS=linux GOARCH=amd64 go build 
