@@ -25,3 +25,21 @@ go get github.com/golang/lint
 go get code.google.com/p/rog-go/exp/cmd/godef
 go get github.com/jstemmer/gotags
 ```
+
+## クロスコンパイル
+
+```
+brew install go --cross-compile-all
+```
+
+https://golang.org/doc/install/source#environment  
+各環境の情報
+
+x86_64はamd64
+
+```
+GOOS=linux GOARCH=amd64 go build 
+```
+
+
+
