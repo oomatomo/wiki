@@ -128,3 +128,10 @@ $ git clone http://*
 $ git clone https://*
 ```
 
+## HTTPSのみを利用する 
+
+Gitのプロトコルを使わずhttpsのみを利用する
+```
+git config --global url."https://".insteadOf git://
+```
+
