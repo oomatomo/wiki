@@ -11,8 +11,8 @@ $ tar xf MySQL-5.5.35-1.el6.x86_64.rpm-bundle.tar
 $ yum localinstall ...
 ```
 
-
-## root パスワード変更
+## ユーザー系
+### root パスワード変更
 
 ```
 # パスワード不要状態での起動
@@ -21,10 +21,16 @@ $ yum localinstall ...
 > update user set Password=PASSWORD('ooma') where Host='localhost' and User='root';
 ```
 
-## 外部アクセス
+### 外部アクセス
 
 ```
 > GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY 'root のパスワード' WITH GRANT OPTION;
+```
+
+### ユーザ権限確認
+
+```
+> show grants for 'hoge'@'%';
 ```
 
 ## 設定ファイルの場所の確認
