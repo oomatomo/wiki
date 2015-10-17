@@ -135,3 +135,9 @@ Gitのプロトコルを使わずhttpsのみを利用する
 git config --global url."https://".insteadOf git://
 ```
 
+## 一括rm
+
+deleted 状態のファイルを一括でrm出来る
+```
+git ls-files --deleted -z | xargs -0 git rm 
+```
