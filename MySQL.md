@@ -92,3 +92,12 @@ ALTER TABLE テーブル名 AUTO_INCREMENT = 1;
 ```
 LOAD DATA INFILE "ファイル名" INTO TABLE テーブル名 FIELDS TERMINATED BY ',';
 ```
+
+## unix timestamp
+ 
+```
+# date <- unixtimstamp 
+from_unixtime(1445221897)
+# unixtimstamp <- string
+unix_timestamp('2015-10-01 00:00:00')
+```
