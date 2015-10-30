@@ -166,6 +166,8 @@ $ docker run -d -t -i oomatomo/base　/bin/zsh
 
 -p [ホストのポート]:[コンテナのポート]
 
+-v [ホストのディレクトリ]:[コンテナのディレクトリ]
+
 ## Dockerにアクセスする
 
 ```
