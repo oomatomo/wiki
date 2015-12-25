@@ -507,3 +507,25 @@ postsuper -d ALL
 設定ファイルの位置
 config: /etc/postfix/main.cf
 config: /etc/postfix/master.cf
+
+## Sendmail
+
+キューがある位置
+/var/spool/mqueue
+
+```
+# キュー削除
+
+```
+rm -f /var/spool/mqueue/*
+```
+
+## rm 
+
+rm -f ./*
+
+bash: /bin/rm: Argument list too long
+
+```
+find . -type f -print | xargs rm
+```
