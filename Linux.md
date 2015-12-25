@@ -515,17 +515,14 @@ config: /etc/postfix/master.cf
 
 ```
 # キュー削除
-
-```
 rm -f /var/spool/mqueue/*
 ```
 
 ## rm 
 
-rm -f ./*
-
-bash: /bin/rm: Argument list too long
-
 ```
+rm -f ./*
+bash: /bin/rm: Argument list too long
+# 正規表現で指定したファイル数が多いと出るエラー
 find . -type f -print | xargs rm
 ```
