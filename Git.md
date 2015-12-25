@@ -141,3 +141,11 @@ deleted 状態のファイルを一括でrm出来る
 ```
 git ls-files --deleted -z | xargs -0 git rm 
 ```
+
+## diff
+
+ブランチまたいでのファイルの差分チェック
+
+```
+git diff master origin/master -- file_path
+```
