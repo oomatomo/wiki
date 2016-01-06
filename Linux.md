@@ -495,6 +495,14 @@ unzip hoge.zip -d fuga
 sed 's/^\(.\+\)$/\"\1\"/g'
 ```
 
+## mail
+
+yum install mailx
+
+```
+echo "test" | /bin/mail -s "test mail" -r from@test.com to1@test.com,to2@test.com
+```
+
 ## Postfix
 
 ```
