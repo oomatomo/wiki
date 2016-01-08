@@ -93,11 +93,34 @@ ALTER TABLE テーブル名 AUTO_INCREMENT = 1;
 LOAD DATA INFILE "ファイル名" INTO TABLE テーブル名 FIELDS TERMINATED BY ',';
 ```
 
-## unix timestamp
+## テーブルの状態
+
+### テーブルの状態
+
+```
+SHOW TABLE STATUS LIKE '%_hoge';
+```
+
+### パーティション確認
+
+```
+SELECT TABLE_SCHEMA, TABLE_NAME, PARTITION_NAME, PARTITION_ORDINAL_POSITION, TABLE_ROWS
+FROM INFORMATION_SCHEMA.PARTITIONS
+WHERE TABLE_NAME LIKE '%_hoge';
+```
+
+## 日付系
+### unix timestamp
  
 ```
 # date <- unixtimstamp 
 from_unixtime(1445221897)
 # unixtimstamp <- string
 unix_timestamp('2015-10-01 00:00:00')
+```
+
+### dateformat
+
+```
+DATE_FORMAT(start_time, '%d-%H')
 ```
