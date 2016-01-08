@@ -534,3 +534,12 @@ bash: /bin/rm: Argument list too long
 # 正規表現で指定したファイル数が多いと出るエラー
 find . -type f -print | xargs rm
 ```
+
+## basic 認証
+
+```
+# 初期作成時には、 -c
+htpasswd -c /var/www/htpasswd admin1
+# 追加
+htpasswd /var/www/htpasswd admin2
+```
