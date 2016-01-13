@@ -72,15 +72,6 @@ drop table innodb_monitor;
 drop table innodb_lock_monitor;
 ```
 
-## MysqlDump
-
-```
-# schemaのdump
-mysqldump -uroot -d [データベース名]
-# データのdump
-mysqldump -uroot -q --single-transaction [データベース名]
-```
-
 ## AUTO_INCREMENT初期化 
 
 ```
@@ -123,4 +114,38 @@ unix_timestamp('2015-10-01 00:00:00')
 
 ```
 DATE_FORMAT(start_time, '%d-%H')
+```
+
+## バックアップ
+### mysqlDump
+
+```
+# schemaのdump
+mysqldump -uroot -d [データベース名]
+# データのdump
+mysqldump -uroot -q --single-transaction [データベース名]
+```
+
+### xtrabackup
+
+```
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=hoge --socket=/var/lib/mysql/mysql.sock --use-memory=4G /backup
+# tar
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=hoge --socket=/var/lib/mysql/mysql.sock --use-memory=4G --stream=tar ./ |  gzip - > backup.tar.gz
+```
+
+slaveでのfullbackup
+
+```
+
+```
+
+### 監視
+
+### show processlist
+
+接続元のIPを出力する
+
+```
+$ while true; do mysql -uhoge -phoge -e "show processlist;" | grep -o -P '\d+\.\d+\.\d+\.\d+' | sort | uniq ; sleep 1; clear; done;
 ```
