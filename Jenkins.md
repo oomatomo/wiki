@@ -105,6 +105,8 @@ GitHub Server API URL: https://api.github.com
 Credentials: トークンを作成
 Application Setup: 空白でデフォルトの設定になる
 # 各ジョブの設定
+## ソースコード管理
+Branch Specifier (blank for 'any'): ${sha1}
 ## ビルド・トリガ
 GitHub API credentials: システム全体の設定で作成したトークンを利用
 Admin list: ここに登録されたユーザからのコメントで操作可能になる
@@ -113,3 +115,5 @@ Crontab line: hookをonしていたら、いらない
 Trigger Setup: jobのトリガーごとにgithubにpushする
 成功失敗ごとに設定できる
 ```
+
+色々なところで設定するとかぶるので注意
