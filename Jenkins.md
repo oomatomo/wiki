@@ -94,3 +94,7 @@ curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
+volumes でやる場合は、権限に注意する
+rootになってしまってjenkinsが書き込みできなくなる場合がある
+
+
