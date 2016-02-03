@@ -97,4 +97,19 @@ chmod +x /usr/local/bin/docker-compose
 volumes でやる場合は、権限に注意する
 rootになってしまってjenkinsが書き込みできなくなる場合がある
 
+# GitHub Pull Request Builder
 
+```
+# システム全体の設定
+GitHub Server API URL: https://api.github.com
+Credentials: トークンを作成
+Application Setup: 空白でデフォルトの設定になる
+# 各ジョブの設定
+## ビルド・トリガ
+GitHub API credentials: システム全体の設定で作成したトークンを利用
+Admin list: ここに登録されたユーザからのコメントで操作可能になる
+Use github hooks for build triggering: hookでbuildすることをonにする
+Crontab line: hookをonしていたら、いらない
+Trigger Setup: jobのトリガーごとにgithubにpushする
+成功失敗ごとに設定できる
+```
