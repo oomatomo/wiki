@@ -509,6 +509,9 @@ echo "test" | /bin/mail -s "test mail" -r from@test.com to1@test.com,to2@test.co
 ```
 # キューの確認
 mailq
+postqueue -p
+# キューの内容を確認
+postcat -q キューID
 # メールキューを削除
 postsuper -d ALL
 ```
