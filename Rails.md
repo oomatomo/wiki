@@ -36,6 +36,8 @@ rails generate migration クラス名 カラム名:データ型( カラム名:�
 ```
 # model のデータを作成する時
 rails generate model group name:string describe:string 
+日付 datetime:datetime
+varcharの長さ str:string{1024}
 
 # リレーション（外部キー設定）
 rails generate model user_group user_id:integer:index group_id:integer:index
