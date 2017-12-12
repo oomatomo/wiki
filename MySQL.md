@@ -3,7 +3,7 @@
 
 ## Install
 
-## rpmからインストール
+### rpmからインストール
 
 ```
 $ wget http://dev.mysql.com/get/Downloads/MySQL-5.5/MySQL-5.5.35-1.el6.x86_64.rpm-bundle.tar
@@ -45,19 +45,6 @@ mysql --help | grep my.cnf
 SELECT GET_LOCK('test',3);
 SELECT RELEASE_LOCK('test');
 ```
-
-## Percona
-
-#### pt-query-digest
-
-ユーザ指定　クエリの実行時間の最大順
-
-```
-pt-query-digest --filter '($event->{user} || "") =~ m/hoge/' --order-by=Query_time:max
-```
-
-## Lock
-
 有効にする
 
 ```
@@ -72,17 +59,40 @@ drop table innodb_monitor;
 drop table innodb_lock_monitor;
 ```
 
+## Percona
+
+#### pt-query-digest
+
+ユーザ指定　クエリの実行時間の最大順
+
+```
+pt-query-digest --filter '($event->{user} || "") =~ m/hoge/' --order-by=Query_time:max
+```
+
 ## AUTO_INCREMENT初期化 
 
 ```
 ALTER TABLE テーブル名 AUTO_INCREMENT = 1;
 ```
 
-## csvをそのままINSERT
+## csv
 
+csvファイルのinsert
 ```
+# csvファイルのinsert
 LOAD DATA INFILE "ファイル名" INTO TABLE テーブル名 FIELDS TERMINATED BY ',';
+# csvファイルの出力
+select * from テーブル名
+  into outfile 'ファイル名'
+  fields terminated by ','
+  optionally enclosed by '"';
+  
+# rdsの場合は使えないので注意
+mysql -u username -p --database=dbname --host=rdshostname --port=rdsport --batch 
+  -e "select * from yourtable" 
+  | sed 's/\t/","/g;s/^/"/;s/$/"/;s/\n//g' > yourlocalfilename
 ```
+https://stackoverflow.com/questions/9536224/exporting-table-from-amazon-rds-into-a-csv-file
 
 ## テーブルの状態
 
